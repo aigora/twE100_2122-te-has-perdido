@@ -1,11 +1,13 @@
-# [Título del trabajo]
+# [¿Te has perdido?]
 
-[Descripción breve del proyecto a realizar (2-3 frases).]
+[Vamos a programar un juego de laberintos.
+Cada laberinto tendrá un nivel de dificultad. ]
 
 ## Integrantes del equipo
 
-[Nombres, apellidos, y usuario GitHub de los integrantes del equipo.]
+[Diego, Martín González, diegomg99]
 
 ## Objetivos del trabajo
 
-[Lista de los objetivos que se persiguen con el trabajo propuesto.]
+[Buscamos que sea un programa muy fácil de utilizar y versátil.
+También queremos que el jugador se divierta, y pueda elegir el laberinto que más le guste.]

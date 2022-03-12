@@ -5,8 +5,9 @@ Cada laberinto tendrá un nivel de dificultad. ]
 
 ## Integrantes del equipo
 
-[Diego, Martín González, diegomg99]
-[Andrés Carlos, Martínez García, AndresCarlos]
+[Diego, Martín González, diegomg99
+Andrés Carlos, Martínez García, AndresCarlos
+Víctor Miguel, Porta Ángel, victorport]
 
 ## Objetivos del trabajo
 

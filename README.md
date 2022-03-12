@@ -5,11 +5,13 @@ Cada laberinto tendrá un nivel de dificultad. ]
 
 ## Integrantes del equipo
 
-[Diego, Martín González, diegomg99]
-[Andrés Carlos, Martínez García, AndresCarlos]
-[Víctor Miguel, Porta Ángel, victorport]
+[Diego, Martín González, diegomg99
+
+Andrés Carlos, Martínez García, AndresCarlos
+
+Víctor Miguel, Porta Ángel, victorport]
 
 ## Objetivos del trabajo
 
-[Buscamos que sea un programa muy fácil de utilizar y versátil.
+[Buscamos que sea un programa muy fácil de utilizar y versátil. 
 También queremos que el jugador se divierta, y pueda elegir el laberinto que más le guste.]

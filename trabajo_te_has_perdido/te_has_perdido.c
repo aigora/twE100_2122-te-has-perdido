@@ -8,7 +8,8 @@ int main()
 {
     char tecla;
     do
-    {   printf("\t\t                                    ??????????????\n");
+    {
+        printf("\t\t                                    ??????????????\n");
         printf("\t\t                                    ? Bienvenido ?\n");
         printf("\t\t                                    ??????????????\n\n\n\n");
         printf("\t\t???????????????????               ???????????????????            ??????????????????\n");
@@ -26,13 +27,13 @@ int main()
         switch(tecla)
         {
         case '1':
-            //laberinto1();
+            laberinto1();
             break;
         case '2':
-            //laberinto2();
+            laberinto2();
             break;
         case '3':
-            //laberinto3();
+            laberinto3();
             break;
         case '0':
             printf("\n\n\nHasta luego!!\n");
@@ -41,4 +42,16 @@ int main()
     }
     while(tecla!='0');
     return 0;
+}
+void laberinto1(void)
+{
+    printf("\t\t              ~~~~~~~~~~~~~~~~Has entrado en el laberinto 1~~~~~~~~~~~~~~~\n\n\n");
+}
+void laberinto2(void)
+{
+    printf("\t\t              ~~~~~~~~~~~~~~~~Has entrado en el laberinto 2~~~~~~~~~~~~~~~\n\n\n");
+}
+void laberinto3(void)
+{
+    printf("\t\t              ~~~~~~~~~~~~~~~~Has entrado en el laberinto 3~~~~~~~~~~~~~~~\n\n\n");
 }

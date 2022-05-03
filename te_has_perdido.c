@@ -1,53 +1,55 @@
 #include<stdio.h>
 
-int laberinto1(void);
+int laberintos(void);
 int laberinto2(void);
 int laberinto3(void);
 void moverse(int posicion[]);
 int menu_salir(void);
 
-int main() //menu principal
+//menu principal
+int main()
 {
-    int tecla_menu;
-    int tecla_laberinto;
+    int tecla_menu, tecla_estadisticas, tecla_laberintos;
     do
     {
-        printf("\t\t                                    ??????????????\n");
-        printf("\t\t                                    ? Bienvenido ?\n");
-        printf("\t\t                                    ??????????????\n\n\n\n");
-        printf("\t\t???????????????????               ???????????????????            ??????????????????\n");
-        printf("\t\t? Laberinto 1 (1) ?               ? Laberinto 2 (2) ?            ? Laberinto 3(3) ?\n");
-        printf("\t\t???????????????????               ???????????????????            ??????????????????\n\n\n\n\n\n\n");
-        printf("\t\t\t                                                                  ????????????\n");
-        printf("\t\t\t                                                                  ? Salir(0) ?\n");
-        printf("\t\t\t                                                                  ????????????\n\n\n");
+        printf("\t\t                                       |------------|\n");
+        printf("\t\t                                       | Bienvenido |\n");
+        printf("\t\t                                       |------------|\n\n\n\n");
+        printf("\t\t  |-------------------------------|                     |------------------------|\n");
+        printf("\t\t  | Registrarse o iniciar sesion  |                     | Estadisticas jugadores |\n");
+        printf("\t\t  |              (1)              |                     |            (2)         |\n");
+        printf("\t\t  |-------------------------------|                     |------------------------|\n\n\n\n\n\n\n");
+        printf("\t\t\t                                                                  |----------|\n");
+        printf("\t\t\t                                                                  | Salir(0) |\n");
+        printf("\t\t\t                                                                  |----------|\n\n\n");
         do
         {
             scanf("%i", &tecla_menu);
             fflush(stdin);   //funcion para que no se sature el scanf
         }
-        while((tecla_menu!=1)&&(tecla_menu!=2)&&(tecla_menu!=3)&&(tecla_menu!=0));
+        while((tecla_menu!=1)&&(tecla_menu!=2)&&(tecla_menu!=0));
 
         switch(tecla_menu)
         {
         case 1:
-            tecla_laberinto=laberinto1();
+            //salida_registrarse_iniciarsesion=registrarse_iniciarsesion();
+            //if(salida_registrarse_iniciarsesion==1)
+            //{
+                tecla_laberintos=laberintos();
+            //}
             break;
         case 2:
-            //tecla_laberinto=laberinto2();
-            break;
-        case 3:
-            //tecla_laberinto=laberinto3();
+            //tecla_estadisticas=estadisticas();
             break;
         case 0:
             printf("\n\n\nHasta luego!!\n");
             break;
         }
     }
-    while((tecla_menu!=0)&&(tecla_laberinto!=0));
+    while((tecla_menu!=0)&&(tecla_laberintos!=0)&&(tecla_estadisticas!=0));
     return 0;
 }
-int laberinto1(void)
+int laberintos(void)
 {
     int posicion[2]; //posicion del jugador
     int salida[2]={100, 20}; //punto del laberinto en el que se encuentra la salida, no lo conoce el usuario,

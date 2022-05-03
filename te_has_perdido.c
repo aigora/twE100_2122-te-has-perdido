@@ -1,8 +1,9 @@
 #include<stdio.h>
 
 int laberintos(void);
-int laberinto2(void);
-int laberinto3(void);
+void laberinto1(int salida[]);
+void laberinto2(int salida[]);
+void laberinto3(int salida[]);
 void moverse(int posicion[]);
 int menu_salir(void);
 
@@ -49,15 +50,38 @@ int main()
     while((tecla_menu!=0)&&(tecla_laberintos!=0)&&(tecla_estadisticas!=0));
     return 0;
 }
+//Menu laberintos
 int laberintos(void)
 {
     int posicion[2]; //posicion del jugador
-    int salida[2]={100, 20}; //punto del laberinto en el que se encuentra la salida, no lo conoce el usuario,
-    int tecla_menu_salir;     //solo el programador
-    printf("\t\t             ~~~~~~~~~~~~~~~~Has entrado en el laberinto 1~~~~~~~~~~~~~~~\n\n\n");
+    int tecla_laberinto;
+    int tecla_menu_salir;
+    int salida_laberinto[2]; //punto del laberinto en el que se encuentra la salida, no lo conoce el usuario,
+                            //solo el programador
+    printf("\t\t  |-----------------|               |-----------------|            |-----------------|\n");
+    printf("\t\t  | Laberinto 1 (1) |               | Laberinto 2 (2) |            | Laberinto 3 (3) |\n");
+    printf("\t\t  |-----------------|               |-----------------|            |-----------------|\n\n\n\n\n\n\n");
+    do
+    {
+        scanf("%i", &tecla_laberinto);
+        fflush(stdin);   //funcion para que no se sature el scanf
+    }
+    while((tecla_laberinto!=1)&&(tecla_laberinto!=2)&&(tecla_laberinto!=3));
+    switch(tecla_laberinto)
+    {
+    case 1:
+        laberinto1(salida_laberinto);//Dibujo laberinto 1 e inserto en el vector salida_laberinto
+        break;                       //la salida del laberinto 1
+    case 2:
+        laberinto2(salida_laberinto);//Dibujo laberinto 2 e inserto en el vector salida_laberinto
+        break;                       //la salida del laberinto 2
+    case 3:
+        laberinto3(salida_laberinto);//Dibujo laberinto 3 e inserto en el vector salida_laberinto
+        break;                       //la salida del laberinto 3
+    }
     printf("Introduzca su posicion inicial: ");
     scanf("%i %i", &posicion[0], &posicion[1]);//Aqui irá el dibujo de la zona del laberinto donde estamos
-    while((posicion[0]!=salida[0])||(posicion[1]!=salida[1]))
+    while((posicion[0]!=salida_laberinto[0])||(posicion[1]!=salida_laberinto[1]))
     {
         moverse(posicion);
         printf("%i %i\n", posicion[0], posicion[1]);
@@ -65,6 +89,28 @@ int laberintos(void)
     printf("\n\n\nEncontraste la salida!!\n\n\n");
     tecla_menu_salir=menu_salir();
     return tecla_menu_salir;
+
+}
+//laberinto 1
+void laberinto1(int salida[])
+{
+    printf("\t\t              ~~~~~~~~~~~~~~~~Has entrado en el laberinto 1~~~~~~~~~~~~~~~\n\n\n");
+    salida[0]=100;
+    salida[1]=20;               //coordenadas salida laberinto 1
+}
+//laberinto 2
+void laberinto2(int salida[])
+{
+    printf("\t\t              ~~~~~~~~~~~~~~~~Has entrado en el laberinto 2~~~~~~~~~~~~~~~\n\n\n");
+    salida[0]=120;
+    salida[1]=20;              //coordenadas salida laberinto 2
+}
+//laberinto 3
+void laberinto3(int salida[])
+{
+    printf("\t\t              ~~~~~~~~~~~~~~~~Has entrado en el laberinto 3~~~~~~~~~~~~~~~\n\n\n");
+    salida[0]=80;
+    salida[1]=20;              //coordenadas salida laberinto 3
 }
 //opcion menu-salir
 int menu_salir(void)
@@ -79,14 +125,7 @@ int menu_salir(void)
     while((tecla!=1)&&(tecla!=0));
     return tecla;
 }
-//int laberinto2(void)
-//{
-//    printf("\t\t              ~~~~~~~~~~~~~~~~Has entrado en el laberinto 2~~~~~~~~~~~~~~~\n\n\n");
-//}
-//int laberinto3(void)
-//{
-//    printf("\t\t              ~~~~~~~~~~~~~~~~Has entrado en el laberinto 3~~~~~~~~~~~~~~~\n\n\n");
-//}
+
 
 void moverse(int posicion[]) //funcion para moverse por el laberinto, cuyo argumento es un vector
 {                            //que indica la posicion en la que nos encontramos

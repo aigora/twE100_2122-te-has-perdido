@@ -1,16 +1,18 @@
 #include<stdio.h>
 
-int laberintos(void);
+void laberintos(void);
 void laberinto1(int salida[]);
 void laberinto2(int salida[]);
 void laberinto3(int salida[]);
-void moverse(int posicion[]);
+//int registrarse_iniciarsesion(void);
+void estadisticas(void);
 int menu_salir(void);
+void moverse(int posicion[]);
 
 //menu principal
 int main()
 {
-    int tecla_menu, tecla_estadisticas, tecla_laberintos;
+    int tecla_menu, tecla_menu_salir;
     do
     {
         printf("\t\t                                       |------------|\n");
@@ -34,28 +36,29 @@ int main()
         {
         case 1:
             //salida_registrarse_iniciarsesion=registrarse_iniciarsesion();
-            //if(salida_registrarse_iniciarsesion==1)
+            //if(salida_registrarse_iniciarsesion==1)  //si devuelve un 1 se ha registrado/iniciado sesion correctamente
             //{
-                tecla_laberintos=laberintos();
+                laberintos();
             //}
+            tecla_menu_salir=menu_salir();
             break;
         case 2:
-            //tecla_estadisticas=estadisticas();
+            //estadisticas();
+            tecla_menu_salir=menu_salir();
             break;
         case 0:
             printf("\n\n\nHasta luego!!\n");
             break;
         }
     }
-    while((tecla_menu!=0)&&(tecla_laberintos!=0)&&(tecla_estadisticas!=0));
+    while((tecla_menu!=0)&&(tecla_menu_salir!=0));
     return 0;
 }
 //Menu laberintos
-int laberintos(void)
+void laberintos(void)
 {
     int posicion[2]; //posicion del jugador
     int tecla_laberinto;
-    int tecla_menu_salir;
     int salida_laberinto[2]; //punto del laberinto en el que se encuentra la salida, no lo conoce el usuario,
                             //solo el programador
     printf("\t\t  |-----------------|               |-----------------|            |-----------------|\n");
@@ -87,9 +90,6 @@ int laberintos(void)
         printf("%i %i\n", posicion[0], posicion[1]);
     }
     printf("\n\n\nEncontraste la salida!!\n\n\n");
-    tecla_menu_salir=menu_salir();
-    return tecla_menu_salir;
-
 }
 //laberinto 1
 void laberinto1(int salida[])

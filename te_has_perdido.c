@@ -12,7 +12,7 @@ void moverse(int posicion[]);
 //menu principal
 int main()
 {
-    int tecla_menu, tecla_menu_salir, tecla_laberintos;
+    int tecla_menu, tecla_menu_salir, tecla_laberintos, tecla_volverajugar;
     int posicion[2]; //posicion del jugador
     int salida_laberinto[2]; //punto del laberinto en el que se encuentra la salida, no lo conoce el usuario,
                                         //solo el programador
@@ -41,7 +41,9 @@ int main()
             //salida_registrarse_iniciarsesion=registrarse_iniciarsesion();
             //if(salida_registrarse_iniciarsesion==1)  //si devuelve un 1 se ha registrado/iniciado sesion correctamente
             //{
-                tecla_laberintos=laberintos();
+                do
+                {
+                    tecla_laberintos=laberintos();
                     switch(tecla_laberintos)
                     {
                     case 1:
@@ -62,6 +64,16 @@ int main()
                         printf("%i %i\n", posicion[0], posicion[1]);
                     }
                     printf("\n\n\nEncontraste la salida!!\n\n\n");
+                    printf("\t\t                          ~~~~~~~Desea volver a jugar?~~~~~~~\n");
+                    printf("\t\t                             ~~~~~~~Si(1)    No(0)~~~~~~~\n\n\n");
+                    do
+                    {
+                        fflush(stdin); //funcion para que no se sature el scanf
+                        scanf("%i", &tecla_volverajugar);
+                    }
+                    while((tecla_volverajugar!=1)&&(tecla_volverajugar!=0));
+                }
+                while(tecla_volverajugar!=0);
             //}
             tecla_menu_salir=menu_salir();
             break;
@@ -69,12 +81,10 @@ int main()
             //estadisticas();
             tecla_menu_salir=menu_salir();
             break;
-        case 0:
-            printf("\n\n\nHasta luego!!\n");
-            break;
         }
     }
     while((tecla_menu!=0)&&(tecla_menu_salir!=0));
+    printf("\n\n\nHasta luego!!\n");
     return 0;
 }
 //Menu laberintos

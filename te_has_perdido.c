@@ -13,6 +13,7 @@ void moverse(int posicion[]);
 int main()
 {
     int tecla_menu, tecla_menu_salir, tecla_laberintos, tecla_volverajugar;
+    int numero_movimientos=0;
     int posicion[2]; //posicion del jugador
     int salida_laberinto[2]; //punto del laberinto en el que se encuentra la salida, no lo conoce el usuario,
                                         //solo el programador
@@ -62,12 +63,15 @@ int main()
                     {
                         moverse(posicion);//mediante el bucle do-while repito la funcion moverse hasta que encuentre la salida
                         printf("%i %i\n", posicion[0], posicion[1]);
+                        numero_movimientos++;//numero de movimientos del jugador
                     }
                     printf("\n\n\nEncontraste la salida!!\n\n\n");
-                    printf("\t\t                          ~~~~~~~Desea volver a jugar?~~~~~~~\n");
-                    printf("\t\t                             ~~~~~~~Si(1)    No(0)~~~~~~~\n\n\n");
-                    do
-                    {
+                    printf("Numero de movimientos: %i\n\n", numero_movimientos);
+                    numero_movimientos=0;//se resetea el numero de movimientos una vez hemos terminado de jugar
+                    printf("\t\t                          ~~~~~~~Desea volver a jugar?~~~~~~~\n");//si desea volver a jugar
+                    printf("\t\t                             ~~~~~~~Si(1)    No(0)~~~~~~~\n\n\n");//volvemos al menu de laberintos
+                    do                                                                            //si no desea volver a jugar
+                    {                                                                             //tenemos la opcion de menu o salir.
                         fflush(stdin); //funcion para que no se sature el scanf
                         scanf("%i", &tecla_volverajugar);
                     }

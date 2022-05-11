@@ -57,11 +57,22 @@ int main()
                         laberinto3(salida_laberinto);//Dibujo laberinto 3 e inserto en el vector salida_laberinto
                         break;                       //la salida del laberinto 3
                     }
-                    printf("Introduzca su posicion inicial: ");
-                    scanf("%i %i", &posicion[0], &posicion[1]);//Aqui irá el dibujo de la zona del laberinto donde estamos
+                    do //pedimos coordenadas iniciales
+                    {
+                        printf("Introduzca las coordenadas de su posicion inicial (X>0 Y>0): ");
+                        scanf("%i %i", &posicion[0], &posicion[1]);
+                        if((posicion[0]>100)||(posicion[0]<0)||(posicion[1]>20)||(posicion[1]<0))
+                        {
+                            printf("Esa posicion se encuentra fuera del laberinto\n\n");
+                        }
+                    }
+                    while((posicion[0]>100)||(posicion[0]<0)||(posicion[1]>20)||(posicion[1]<0));
+
+                    //Aqui ira el dibujo de la zona del laberinto donde estamos
+
                     while((posicion[0]!=salida_laberinto[0])||(posicion[1]!=salida_laberinto[1]))
                     {
-                        moverse(posicion);//mediante el bucle do-while repito la funcion moverse hasta que encuentre la salida
+                        moverse(posicion);//mediante el bucle while repito la funcion moverse hasta que encuentre la salida
                         printf("%i %i\n", posicion[0], posicion[1]);
                         numero_movimientos++;//numero de movimientos del jugador
                     }

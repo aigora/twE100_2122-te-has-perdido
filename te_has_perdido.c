@@ -150,10 +150,22 @@ void moverse(int posicion[]) //funcion para moverse por el laberinto, cuyo argum
     switch(tecla)
     {
     case 'w': //moverse una posicion hacia arriba
-    case 'W':
-        //if(laberinto!=pared) se avanza
         posicion[1]++;
         break;
+    case 'W':
+      posicion[1]++;
+        //if(laberinto!=pared) se avanza
+
+       /*
+       Con esto haremos que al pulsar la mayuscula avance hasta 5 espacios en vez de uno
+       y que si en el proceso se encuentra una pared pare justo antes de tocarlo
+
+       for(i=0; i<5;i++)
+       {
+           //if() Si la posicion es igual a pared para el bucle
+           posicion[1]++;
+       }
+       */
     case 'd': //moverse una posicion hacia la derecha
     case 'D':
         posicion[0]++;
@@ -167,5 +179,14 @@ void moverse(int posicion[]) //funcion para moverse por el laberinto, cuyo argum
         posicion[0]--;
         break;
     }
+
+}
+
+int registrarse_iniciarsesion(void)
+{
+    char nombre[20], contrasenna[20];
+
+    printf("Escribe tu nombre y tu contraseña.");
+    scanf("%s\n %s", &nombre, &contrasenna);
 
 }

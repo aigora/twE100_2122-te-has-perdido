@@ -16,7 +16,25 @@ int main()
     int numero_movimientos=0;
     int posicion[2]; //posicion del jugador
     int salida_laberinto[2]; //punto del laberinto en el que se encuentra la salida, no lo conoce el usuario,
-                                        //solo el programador
+                            //solo el programador
+    FILE *pLaberinto;
+    char matriz_laberinto[8][100]; //matriz de caracteres para almacenar los laberintos que escaneemos
+    int fila=0, columna=0;
+
+    //abrimos fichero laberinto e introducimos los caracteres en una matriz
+    pLaberinto=fopen("lab.txt", "r");
+    while(fscanf(pLaberinto, "%c", &matriz_laberinto[fila][columna])!=EOF)//guardar laberinto en una matriz
+    {
+        if(matriz_laberinto[fila][columna]=='\n')
+        {
+            fila++;
+            columna=0;
+        }
+        else
+            columna++;
+
+    }
+    fclose(pLaberinto);
     do
     {
         printf("\t\t                                       |------------|\n");
@@ -61,19 +79,26 @@ int main()
                     {
                         printf("Introduzca las coordenadas de su posicion inicial (X>0 Y>0): ");
                         scanf("%i %i", &posicion[0], &posicion[1]);
-                        if((posicion[0]>100)||(posicion[0]<0)||(posicion[1]>20)||(posicion[1]<0))
+                        if((posicion[0]>100)||(posicion[0]<0)||(posicion[1]>8)||(posicion[1]<0))
                         {
                             printf("Esa posicion se encuentra fuera del laberinto\n\n");
                         }
                     }
-                    while((posicion[0]>100)||(posicion[0]<0)||(posicion[1]>20)||(posicion[1]<0));
+                    while((posicion[0]>100)||(posicion[0]<0)||(posicion[1]>8)||(posicion[1]<0));
 
                     //Aqui ira el dibujo de la zona del laberinto donde estamos
+                    for(fila=0; fila<8; fila++)
+                    {
+                        for(columna=0; columna<100; columna++)//las interrogaciones son pistas
+                        {
+                            printf("%c", matriz_laberinto[fila][columna]);
+                        }
+                    }
 
                     while((posicion[0]!=salida_laberinto[0])||(posicion[1]!=salida_laberinto[1]))
                     {
                         moverse(posicion);//mediante el bucle while repito la funcion moverse hasta que encuentre la salida
-                        printf("%i %i\n", posicion[0], posicion[1]);
+                        printf("%i %i\n", posicion[0], posicion[1]); //Aqui ira el dibujo de la zona del laberinto donde estamos
                         numero_movimientos++;//numero de movimientos del jugador
                     }
                     printf("\n\n\nEncontraste la salida!!\n\n\n");
@@ -122,7 +147,7 @@ void laberinto1(int salida[])
 {
     printf("\t\t              ~~~~~~~~~~~~~~~~Has entrado en el laberinto 1~~~~~~~~~~~~~~~\n\n\n");
     salida[0]=100;
-    salida[1]=20;               //coordenadas salida laberinto 1
+    salida[1]=7;               //coordenadas salida laberinto 1
 }
 //laberinto 2
 void laberinto2(int salida[])

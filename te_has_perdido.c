@@ -7,7 +7,7 @@ void laberinto3(int salida[]);
 //int registrarse_iniciarsesion(void);
 void estadisticas(void);
 int menu_salir(void);
-void moverse(int posicion[]);
+void moverse(char matriz[][100], int *fila, int *columna);
 
 //menu principal
 int main()
@@ -78,14 +78,16 @@ int main()
                     do //pedimos coordenadas iniciales
                     {
                         printf("Introduzca las coordenadas de su posicion inicial (X>0 Y>0): ");
-                        scanf("%i %i", &posicion[0], &posicion[1]);
-                        if((posicion[0]>100)||(posicion[0]<0)||(posicion[1]>8)||(posicion[1]<0))
+                        scanf("%i %i", &posicion[0], &posicion[1]);//fila y columna en la que quiero estar
+                        if((posicion[0]>=8)||(posicion[0]<0)||(posicion[1]>=100)||(posicion[1]<0))
                         {
                             printf("Esa posicion se encuentra fuera del laberinto\n\n");
                         }
                     }
-                    while((posicion[0]>100)||(posicion[0]<0)||(posicion[1]>8)||(posicion[1]<0));
+                    while((posicion[0]>=8)||(posicion[0]<0)||(posicion[1]>=100)||(posicion[1]<0));
 
+                    matriz_laberinto[posicion[0]][posicion[1]]='X';//Marcamos con una X nuestro posicion actual
+                                                                   //La X va a ser nuestro cursor
                     //Aqui ira el dibujo de la zona del laberinto donde estamos
                     for(fila=0; fila<8; fila++)
                     {
@@ -97,7 +99,7 @@ int main()
 
                     while((posicion[0]!=salida_laberinto[0])||(posicion[1]!=salida_laberinto[1]))
                     {
-                        moverse(posicion);//mediante el bucle while repito la funcion moverse hasta que encuentre la salida
+                        moverse(matriz_laberinto, &posicion[0], &posicion[1]);//mediante el bucle while repito la funcion moverse hasta que encuentre la salida
                         printf("%i %i\n", posicion[0], posicion[1]); //Aqui ira el dibujo de la zona del laberinto donde estamos
                         numero_movimientos++;//numero de movimientos del jugador
                     }
@@ -146,8 +148,8 @@ int laberintos(void)
 void laberinto1(int salida[])
 {
     printf("\t\t              ~~~~~~~~~~~~~~~~Has entrado en el laberinto 1~~~~~~~~~~~~~~~\n\n\n");
-    salida[0]=100;
-    salida[1]=7;               //coordenadas salida laberinto 1
+    salida[0]=6;
+    salida[1]=98;               //coordenadas salida laberinto 1
 }
 //laberinto 2
 void laberinto2(int salida[])
@@ -177,19 +179,24 @@ int menu_salir(void)
     return tecla;
 }
 
-
-void moverse(int posicion[]) //funcion para moverse por el laberinto, cuyo argumento es un vector
-{                            //que indica la posicion en la que nos encontramos
-    char tecla;
+//Funcion para movernos por el laberinto
+void moverse(char matriz[][100], int *fila, int *columna) //funcion para moverse por el laberinto, en la que vamos a
+{                                                         //introducir como argumentos nuestra matriz_laberinto y la
+    char tecla;                                           //direccion de memoria de las variables de nuestro vector de posicion
+    char auxiliar;
     printf("\nMuevete por el laberinto.\n");
     scanf(" %c", &tecla);
     switch(tecla)
     {
     case 'w': //moverse una posicion hacia arriba
-        posicion[1]++;
-        break;
     case 'W':
-      posicion[1]++;
+        auxiliar=matriz[*fila][*columna];      //Nuestro punto actual se intercambia con el punto que esta encima de el
+        matriz[*fila][*columna]=matriz[*fila-1][*columna];
+        matriz[*fila-1][*columna]=auxiliar;
+        *fila=*fila-1;
+        break;
+//    case 'W':
+//      posicion[1]++;
         //if(laberinto!=pared) se avanza
 
        /*
@@ -204,15 +211,24 @@ void moverse(int posicion[]) //funcion para moverse por el laberinto, cuyo argum
        */
     case 'd': //moverse una posicion hacia la derecha
     case 'D':
-        posicion[0]++;
+        auxiliar=matriz[*fila][*columna];     //Nuestro punto actual se intercambia con el punto que esta a su derecha
+        matriz[*fila][*columna]=matriz[*fila][*columna+1];
+        matriz[*fila][*columna+1]=auxiliar;
+        *columna=*columna+1;
         break;
     case 's': //moverse una posicion hacia abajo
     case 'S':
-        posicion[1]--;
+        auxiliar=matriz[*fila][*columna];     //Nuestro punto actual se intercambia con el punto que esta debajo
+        matriz[*fila][*columna]=matriz[*fila+1][*columna];
+        matriz[*fila+1][*columna]=auxiliar;
+        *fila=*fila+1;
         break;
     case 'a': //moverse una posicion hacia la izquierda
     case 'A':
-        posicion[0]--;
+        auxiliar=matriz[*fila][*columna];     //Nuestro punto actual se intercambia con el punto que esta a su izquierda
+        matriz[*fila][*columna]=matriz[*fila][*columna-1];
+        matriz[*fila][*columna-1]=auxiliar;
+        *columna=*columna-1;
         break;
     }
 

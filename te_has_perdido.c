@@ -197,63 +197,111 @@ void moverse(char matriz[][100], int *fila, int *columna) //funcion para moverse
     switch(tecla)
     {
     case 'w': //moverse una posicion hacia arriba
+        if(matriz[*fila-1][*columna] == ' ')
+        {
         auxiliar=matriz[*fila][*columna];      //Nuestro punto actual se intercambia con el punto que esta encima de el
         matriz[*fila][*columna]=matriz[*fila-1][*columna];
         matriz[*fila-1][*columna]=auxiliar;
         *fila=*fila-1;
+        }else
+        {
+            printf("Estas chocando contra una pared desplazate hacia otro lugar.\n");
+        }
         break;
     case 'W':
         for(i=0; i<5; i++)//Con la mayuscula avanzas 5 posiciones en vez de 1
+        {
+        if(matriz[*fila-1][*columna] == ' ')
         {
         auxiliar=matriz[*fila][*columna];
         matriz[*fila][*columna]=matriz[*fila-1][*columna];
         matriz[*fila-1][*columna]=auxiliar;
         *fila=*fila-1;
+        }else
+        {
+            printf("Estas chocando contra una pared desplazate hacia otro lugar.\n");
+        }
         }
         break;
     case 'd': //moverse una posicion hacia la derecha
+        if(matriz[*fila][*columna+1] == ' ')
+        {
         auxiliar=matriz[*fila][*columna];     //Nuestro punto actual se intercambia con el punto que esta a su derecha
         matriz[*fila][*columna]=matriz[*fila][*columna+1];
         matriz[*fila][*columna+1]=auxiliar;
         *columna=*columna+1;
+        }else
+        {
+            printf("Estas chocando contra una pared desplazate hacia otro lugar.\n");
+        }
         break;
     case 'D':
         for(i=0; i<5; i++)
+        {
+        if(matriz[*fila][*columna+1] == ' ')
         {
         auxiliar=matriz[*fila][*columna];
         matriz[*fila][*columna]=matriz[*fila][*columna+1];
         matriz[*fila][*columna+1]=auxiliar;
         *columna=*columna+1;
+        }else
+        {
+            printf("Estas chocando contra una pared desplazate hacia otro lugar.\n");
+        }
         }
         break;
     case 's': //moverse una posicion hacia abajo
+        if(matriz[*fila+1][*columna] == ' ')
+        {
         auxiliar=matriz[*fila][*columna];     //Nuestro punto actual se intercambia con el punto que esta debajo
         matriz[*fila][*columna]=matriz[*fila+1][*columna];
         matriz[*fila+1][*columna]=auxiliar;
         *fila=*fila+1;
+        }else
+        {
+            printf("Estas chocando contra una pared desplazate hacia otro lugar.\n");
+        }
         break;
     case 'S':
         for(i=0; i<5; i++)
+        {
+        if(matriz[*fila+1][*columna] == ' ')
         {
         auxiliar=matriz[*fila][*columna];
         matriz[*fila][*columna]=matriz[*fila+1][*columna];
         matriz[*fila+1][*columna]=auxiliar;
         *fila=*fila+1;
+        }else
+        {
+            printf("Estas chocando contra una pared desplazate hacia otro lugar.\n");
+        }
         }
         break;
     case 'a': //moverse una posicion hacia la izquierda
+         if(matriz[*fila][*columna-1] == ' ')
+         {
         auxiliar=matriz[*fila][*columna];     //Nuestro punto actual se intercambia con el punto que esta a su izquierda
         matriz[*fila][*columna]=matriz[*fila][*columna-1];
         matriz[*fila][*columna-1]=auxiliar;
         *columna=*columna-1;
+         }else
+        {
+            printf("Estas chocando contra una pared desplazate hacia otro lugar.\n");
+        }
         break;
     case 'A':
          for(i=0; i<5; i++)
          {
+        if(matriz[*fila][*columna-1] == ' ')
+        {
         auxiliar=matriz[*fila][*columna];
         matriz[*fila][*columna]=matriz[*fila][*columna-1];
         matriz[*fila][*columna-1]=auxiliar;
         *columna=*columna-1;
+        }else
+        {
+            printf("Estas chocando contra una pared desplazate hacia otro lugar.\n");
+        }
          }
         break;
     }

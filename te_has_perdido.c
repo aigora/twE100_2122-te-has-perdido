@@ -23,18 +23,27 @@ int main()
 
     //abrimos fichero laberinto e introducimos los caracteres en una matriz
     pLaberinto=fopen("lab.txt", "r");
-    while(fscanf(pLaberinto, "%c", &matriz_laberinto[fila][columna])!=EOF)//guardar laberinto en una matriz
+    if(pLaberinto==NULL)
     {
-        if(matriz_laberinto[fila][columna]=='\n')
-        {
-            fila++;
-            columna=0;
-        }
-        else
-            columna++;
-
+         printf("Error al abrir fichero\n");
+         return -1;
     }
-    fclose(pLaberinto);
+    else
+    {
+        while(fscanf(pLaberinto, "%c", &matriz_laberinto[fila][columna])!=EOF)//guardar laberinto en una matriz
+        {
+            if(matriz_laberinto[fila][columna]=='\n')
+            {
+                fila++;
+                columna=0;
+            }
+            else
+                columna++;
+
+        }
+        fclose(pLaberinto);
+    }
+
     do
     {
         printf("\t\t                                       |------------|\n");

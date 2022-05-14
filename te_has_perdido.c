@@ -84,16 +84,22 @@ int main()
                         laberinto3(salida_laberinto);//Dibujo laberinto 3 e inserto en el vector salida_laberinto
                         break;                       //la salida del laberinto 3
                     }
-                    do //pedimos coordenadas iniciales
+                    do//pedimos coordenadas iniciales
                     {
-                        printf("Introduzca las coordenadas de su posicion inicial (Fila>0 Columna>0): ");
+                        printf("Introduzca su posicion inicial (fila>0, columna>0): ");
                         scanf("%i %i", &posicion[0], &posicion[1]);//fila y columna en la que quiero estar
                         if((posicion[0]>=20)||(posicion[0]<0)||(posicion[1]>=100)||(posicion[1]<0))
                         {
                             printf("Esa posicion se encuentra fuera del laberinto\n\n");
                         }
+                        else if((matriz_laberinto[posicion[0]][posicion[1]]!=' ')&&(matriz_laberinto[posicion[0]][posicion[1]]!='?'))
+                        {
+                            printf("Esa posicion es una pared\n");
+                        }
                     }
-                    while((posicion[0]>=20)||(posicion[0]<0)||(posicion[1]>=100)||(posicion[1]<0));
+                    while(posicion[0]>=20||(posicion[0]<0)||(posicion[1]>=100)||(posicion[1]<0)||
+                          ((matriz_laberinto[posicion[0]][posicion[1]]!=' ')&&(matriz_laberinto[posicion[0]][posicion[1]]!='?')));
+                    //si la posicion elegida es una pared o se encuentra fuera del laberinto se vuelven a pedir coordenadas
 
                     matriz_laberinto[posicion[0]][posicion[1]]='X';//Marcamos con una X nuestro posicion actual
                                                                    //La X va a ser nuestro cursor

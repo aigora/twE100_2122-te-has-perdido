@@ -237,6 +237,7 @@ void moverse(char matriz[][100], int *fila, int *columna) //funcion para moverse
         }else
         {
             printf("Estas chocando contra una pared desplazate hacia otro lugar.\n");
+            break;
         }
         }
         break;
@@ -264,6 +265,7 @@ void moverse(char matriz[][100], int *fila, int *columna) //funcion para moverse
         }else
         {
             printf("Estas chocando contra una pared desplazate hacia otro lugar.\n");
+            break;
         }
         }
         break;
@@ -291,6 +293,7 @@ void moverse(char matriz[][100], int *fila, int *columna) //funcion para moverse
         }else
         {
             printf("Estas chocando contra una pared desplazate hacia otro lugar.\n");
+            break;
         }
         }
         break;
@@ -318,6 +321,7 @@ void moverse(char matriz[][100], int *fila, int *columna) //funcion para moverse
         }else
         {
             printf("Estas chocando contra una pared desplazate hacia otro lugar.\n");
+            break;
         }
          }
         break;

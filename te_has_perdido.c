@@ -178,7 +178,7 @@ int laberintos(void)
 void laberinto1(int salida[])
 {
     printf("\t\t              ~~~~~~~~~~~~~~~~Has entrado en el laberinto 1~~~~~~~~~~~~~~~\n\n\n");
-    salida[0]=6;
+    salida[0]=18;
     salida[1]=98;               //coordenadas salida laberinto 1
 }
 //laberinto 2
@@ -216,24 +216,37 @@ void moverse(char matriz[][100], int *fila, int *columna) //funcion para moverse
     char tecla;
     char auxiliar;
     printf("\nMuevete por el laberinto.\n");
-    scanf(" %c", &tecla);
+    do
+    {
+        fflush(stdin); //funcion para que no se sature el scanf
+        scanf("%c", &tecla);
+        if((tecla!='w')&&(tecla!='W')&&(tecla!='a')&&(tecla!='A')&&(tecla!='d')&&(tecla!='D')&&(tecla!='s')&&(tecla!='S'))
+        {
+           printf("Tecla incorrecta\n");
+        }
+
+    }
+    while((tecla!='w')&&(tecla!='W')&&(tecla!='a')&&(tecla!='A')&&(tecla!='d')&&(tecla!='D')&&(tecla!='s')&&(tecla!='S'));
+
     switch(tecla)
     {
     case 'w': //moverse una posicion hacia arriba
         if(matriz[*fila-1][*columna] == ' ')
         {
-        auxiliar=matriz[*fila][*columna];      //Nuestro punto actual se intercambia con el punto que esta encima de el
-        matriz[*fila][*columna]=matriz[*fila-1][*columna];
-        matriz[*fila-1][*columna]=auxiliar;
-        *fila=*fila-1;
-        }else if(matriz[*fila-1][*columna] == '?')
+            auxiliar=matriz[*fila][*columna];      //Nuestro punto actual se intercambia con el punto que esta encima de el
+            matriz[*fila][*columna]=matriz[*fila-1][*columna];
+            matriz[*fila-1][*columna]=auxiliar;
+            *fila=*fila-1;
+        }
+        else if(matriz[*fila-1][*columna] == '?')
         {
-        printf("Pista: La salida esta hacia la derecha\n");
-        auxiliar=matriz[*fila][*columna];      //Nuestro punto actual se intercambia con el punto que esta encima de el
-        matriz[*fila][*columna]=matriz[*fila-2][*columna];
-        matriz[*fila-2][*columna]=auxiliar;
-        *fila=*fila-2;
-        }else
+            printf("Pista: La salida esta hacia la derecha\n");
+            auxiliar=matriz[*fila][*columna];      //Nuestro punto actual se intercambia con el punto que esta encima de el
+            matriz[*fila][*columna]=matriz[*fila-2][*columna];
+            matriz[*fila-2][*columna]=auxiliar;
+            *fila=*fila-2;
+        }
+        else
         {
             printf("Estas chocando contra una pared desplazate hacia otro lugar.\n");
         }
@@ -241,41 +254,45 @@ void moverse(char matriz[][100], int *fila, int *columna) //funcion para moverse
     case 'W':
         for(i=0; i<5; i++)//Con la mayuscula avanzas 5 posiciones en vez de 1
         {
-        if(matriz[*fila-1][*columna] == ' ')
-        {
-        auxiliar=matriz[*fila][*columna];
-        matriz[*fila][*columna]=matriz[*fila-1][*columna];
-        matriz[*fila-1][*columna]=auxiliar;
-        *fila=*fila-1;
-        }else if(matriz[*fila-1][*columna] == '?')
-        {
-        printf("Pista: La salida esta hacia la derecha\n");
-        auxiliar=matriz[*fila][*columna];      //Nuestro punto actual se intercambia con el punto que esta encima de el
-        matriz[*fila][*columna]=matriz[*fila-2][*columna];
-        matriz[*fila-2][*columna]=auxiliar;
-        *fila=*fila-2;
-        }else
-        {
-            printf("Estas chocando contra una pared desplazate hacia otro lugar.\n");
-            break;
-        }
+            if(matriz[*fila-1][*columna] == ' ')
+            {
+                auxiliar=matriz[*fila][*columna];
+                matriz[*fila][*columna]=matriz[*fila-1][*columna];
+                matriz[*fila-1][*columna]=auxiliar;
+                *fila=*fila-1;
+            }
+            else if(matriz[*fila-1][*columna] == '?')
+            {
+                printf("Pista: La salida esta hacia la derecha\n");
+                auxiliar=matriz[*fila][*columna];      //Nuestro punto actual se intercambia con el punto que esta encima de el
+                matriz[*fila][*columna]=matriz[*fila-2][*columna];
+                matriz[*fila-2][*columna]=auxiliar;
+                *fila=*fila-2;
+            }
+            else
+            {
+                printf("Estas chocando contra una pared desplazate hacia otro lugar.\n");
+                break;
+            }
         }
         break;
     case 'd': //moverse una posicion hacia la derecha
         if(matriz[*fila][*columna+1] == ' ')
         {
-        auxiliar=matriz[*fila][*columna];     //Nuestro punto actual se intercambia con el punto que esta a su derecha
-        matriz[*fila][*columna]=matriz[*fila][*columna+1];
-        matriz[*fila][*columna+1]=auxiliar;
-        *columna=*columna+1;
-        }else if(matriz[*fila][*columna+1] == '?')
+            auxiliar=matriz[*fila][*columna];     //Nuestro punto actual se intercambia con el punto que esta a su derecha
+            matriz[*fila][*columna]=matriz[*fila][*columna+1];
+            matriz[*fila][*columna+1]=auxiliar;
+            *columna=*columna+1;
+        }
+        else if(matriz[*fila][*columna+1] == '?')
         {
-        printf("Pista: La salida esta hacia la derecha\n");
-        auxiliar=matriz[*fila][*columna];
-        matriz[*fila][*columna]=matriz[*fila][*columna+2];
-        matriz[*fila][*columna+2]=auxiliar;
-        *columna=*columna+2;
-        }else
+            printf("Pista: La salida esta hacia la derecha\n");
+            auxiliar=matriz[*fila][*columna];
+            matriz[*fila][*columna]=matriz[*fila][*columna+2];
+            matriz[*fila][*columna+2]=auxiliar;
+            *columna=*columna+2;
+        }
+        else
         {
             printf("Estas chocando contra una pared desplazate hacia otro lugar.\n");
         }
@@ -283,41 +300,45 @@ void moverse(char matriz[][100], int *fila, int *columna) //funcion para moverse
     case 'D':
         for(i=0; i<5; i++)
         {
-        if(matriz[*fila][*columna+1] == ' ')
-        {
-        auxiliar=matriz[*fila][*columna];
-        matriz[*fila][*columna]=matriz[*fila][*columna+1];
-        matriz[*fila][*columna+1]=auxiliar;
-        *columna=*columna+1;
-        }else if(matriz[*fila][*columna+1] == '?')
-        {
-        printf("Pista: La salida esta hacia la derecha\n");
-        auxiliar=matriz[*fila][*columna];
-        matriz[*fila][*columna]=matriz[*fila][*columna+2];
-        matriz[*fila][*columna+2]=auxiliar;
-        *columna=*columna+2;
-        }else
-        {
-            printf("Estas chocando contra una pared desplazate hacia otro lugar.\n");
-            break;
-        }
+            if(matriz[*fila][*columna+1] == ' ')
+            {
+                auxiliar=matriz[*fila][*columna];
+                matriz[*fila][*columna]=matriz[*fila][*columna+1];
+                matriz[*fila][*columna+1]=auxiliar;
+                *columna=*columna+1;
+            }
+            else if(matriz[*fila][*columna+1] == '?')
+            {
+                printf("Pista: La salida esta hacia la derecha\n");
+                auxiliar=matriz[*fila][*columna];
+                matriz[*fila][*columna]=matriz[*fila][*columna+2];
+                matriz[*fila][*columna+2]=auxiliar;
+                *columna=*columna+2;
+            }
+            else
+            {
+                printf("Estas chocando contra una pared desplazate hacia otro lugar.\n");
+                break;
+            }
         }
         break;
     case 's': //moverse una posicion hacia abajo
         if(matriz[*fila+1][*columna] == ' ')
         {
-        auxiliar=matriz[*fila][*columna];     //Nuestro punto actual se intercambia con el punto que esta debajo
-        matriz[*fila][*columna]=matriz[*fila+1][*columna];
-        matriz[*fila+1][*columna]=auxiliar;
-        *fila=*fila+1;
-        }else if(matriz[*fila+1][*columna] == '?')
+            auxiliar=matriz[*fila][*columna];     //Nuestro punto actual se intercambia con el punto que esta debajo
+            matriz[*fila][*columna]=matriz[*fila+1][*columna];
+            matriz[*fila+1][*columna]=auxiliar;
+            *fila=*fila+1;
+        }
+        else if(matriz[*fila+1][*columna] == '?')
         {
-        printf("Pista: La salida esta hacia la derecha\n");
-        auxiliar=matriz[*fila][*columna];
-        matriz[*fila][*columna]=matriz[*fila+2][*columna];
-        matriz[*fila+2][*columna]=auxiliar;
-        *fila=*fila+2;
-        }else
+            printf("Pista: La salida esta hacia la derecha\n");
+            auxiliar=matriz[*fila][*columna];
+            matriz[*fila][*columna]=matriz[*fila+2][*columna];
+            matriz[*fila+2][*columna]=auxiliar;
+            *fila=*fila+2;
+        }
+        else
         {
             printf("Estas chocando contra una pared desplazate hacia otro lugar.\n");
         }
@@ -325,67 +346,73 @@ void moverse(char matriz[][100], int *fila, int *columna) //funcion para moverse
     case 'S':
         for(i=0; i<5; i++)
         {
-        if(matriz[*fila+1][*columna] == ' ')
-        {
-        auxiliar=matriz[*fila][*columna];
-        matriz[*fila][*columna]=matriz[*fila+1][*columna];
-        matriz[*fila+1][*columna]=auxiliar;
-        *fila=*fila+1;
-        }else if(matriz[*fila+1][*columna] == '?')
-        {
-        printf("Pista: La salida esta hacia la derecha\n");
-        auxiliar=matriz[*fila][*columna];
-        matriz[*fila][*columna]=matriz[*fila+2][*columna];
-        matriz[*fila+2][*columna]=auxiliar;
-        *fila=*fila+2;
-        }else
-        {
-            printf("Estas chocando contra una pared desplazate hacia otro lugar.\n");
-            break;
-        }
+            if(matriz[*fila+1][*columna] == ' ')
+            {
+                auxiliar=matriz[*fila][*columna];
+                matriz[*fila][*columna]=matriz[*fila+1][*columna];
+                matriz[*fila+1][*columna]=auxiliar;
+                *fila=*fila+1;
+            }
+            else if(matriz[*fila+1][*columna] == '?')
+            {
+                printf("Pista: La salida esta hacia la derecha\n");
+                auxiliar=matriz[*fila][*columna];
+                matriz[*fila][*columna]=matriz[*fila+2][*columna];
+                matriz[*fila+2][*columna]=auxiliar;
+                *fila=*fila+2;
+            }
+            else
+            {
+                printf("Estas chocando contra una pared desplazate hacia otro lugar.\n");
+                break;
+            }
         }
         break;
     case 'a': //moverse una posicion hacia la izquierda
-         if(matriz[*fila][*columna-1] == ' ')
-         {
-        auxiliar=matriz[*fila][*columna];     //Nuestro punto actual se intercambia con el punto que esta a su izquierda
-        matriz[*fila][*columna]=matriz[*fila][*columna-1];
-        matriz[*fila][*columna-1]=auxiliar;
-        *columna=*columna-1;
-         }else if(matriz[*fila][*columna-1] == '?')
+        if(matriz[*fila][*columna-1] == ' ')
         {
-        printf("Pista: La salida esta hacia la derecha\n");
-        auxiliar=matriz[*fila][*columna];
-        matriz[*fila][*columna]=matriz[*fila][*columna+2];
-        matriz[*fila][*columna-2]=auxiliar;
-        *columna=*columna-2;
-        }else
+            auxiliar=matriz[*fila][*columna];     //Nuestro punto actual se intercambia con el punto que esta a su izquierda
+            matriz[*fila][*columna]=matriz[*fila][*columna-1];
+            matriz[*fila][*columna-1]=auxiliar;
+            *columna=*columna-1;
+        }
+        else if(matriz[*fila][*columna-1] == '?')
+        {
+            printf("Pista: La salida esta hacia la derecha\n");
+            auxiliar=matriz[*fila][*columna];
+            matriz[*fila][*columna]=matriz[*fila][*columna+2];
+            matriz[*fila][*columna-2]=auxiliar;
+            *columna=*columna-2;
+        }
+        else
         {
             printf("Estas chocando contra una pared desplazate hacia otro lugar.\n");
         }
         break;
     case 'A':
-         for(i=0; i<5; i++)
-         {
-        if(matriz[*fila][*columna-1] == ' ')
+        for(i=0; i<5; i++)
         {
-        auxiliar=matriz[*fila][*columna];
-        matriz[*fila][*columna]=matriz[*fila][*columna-1];
-        matriz[*fila][*columna-1]=auxiliar;
-        *columna=*columna-1;
-        }else if(matriz[*fila][*columna-1] == '?')
-        {
-        printf("Pista: La salida esta hacia la derecha\n");
-        auxiliar=matriz[*fila][*columna];
-        matriz[*fila][*columna]=matriz[*fila][*columna+2];
-        matriz[*fila][*columna-2]=auxiliar;
-        *columna=*columna-2;
-        }else
-        {
-            printf("Estas chocando contra una pared desplazate hacia otro lugar.\n");
-            break;
+            if(matriz[*fila][*columna-1] == ' ')
+            {
+                auxiliar=matriz[*fila][*columna];
+                matriz[*fila][*columna]=matriz[*fila][*columna-1];
+                matriz[*fila][*columna-1]=auxiliar;
+                *columna=*columna-1;
+            }
+            else if(matriz[*fila][*columna-1] == '?')
+            {
+                printf("Pista: La salida esta hacia la derecha\n");
+                auxiliar=matriz[*fila][*columna];
+                matriz[*fila][*columna]=matriz[*fila][*columna+2];
+                matriz[*fila][*columna-2]=auxiliar;
+                *columna=*columna-2;
+            }
+            else
+            {
+                printf("Estas chocando contra una pared desplazate hacia otro lugar.\n");
+                break;
+            }
         }
-         }
         break;
     }
 

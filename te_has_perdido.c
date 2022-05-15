@@ -1,4 +1,5 @@
 #include<stdio.h>
+#include <stdbool.h>
 
 int laberintos(void);
 void laberinto1(int salida[]);

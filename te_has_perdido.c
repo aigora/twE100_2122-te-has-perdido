@@ -424,7 +424,35 @@ int registrarse_iniciarsesion(void)
 {
     char nombre[20], contrasenna[20];
 
-    printf("Escribe tu nombre y tu contraseña.");
+    printf("Escribe tu nombre y tu contraseÃ±a.");
     scanf("%s\n %s", &nombre, &contrasenna);
 
 }
+void estadisticas ()
+{
+	FILE *pf;
+	int movimientos[100], contador=0 ,n, numero_movimientos [3] = {0,0,0};
+	bool total = 0;
+	pf =fopen ("Estadisticas.txt", "r");
+	if (pf==NULL)//
+	{
+		printf ("No hay estadisticas anteriores\n");
+		fclose (pf);
+		pf = fopen ("Estadisticas.txt", "w");
+		fclose (pf);
+		system ("pause");
+		printf ("\n\n");
+		return;
+	}
+	while (fscanf (pf, "%d", &movimientos[contador]) != EOF)// escanea
+	{
+		if (contador >= 99)
+		{
+			contador = 0;
+			total = 1;
+		}
+
+	}
+
+}
+

@@ -18,31 +18,31 @@ int main()
     int posicion[2]; //posicion del jugador
     int salida_laberinto[2]; //punto del laberinto en el que se encuentra la salida, no lo conoce el usuario,
                             //solo el programador
-    FILE *pLaberinto;
-    char matriz_laberinto[20][100]; //matriz de caracteres para almacenar los laberintos que escaneemos
+    FILE *pLaberinto1, *pLaberinto2, *pLaberinto3;
+    char matriz_laberinto[20][100];
+    char matriz_laberinto1[20][100], matriz_laberinto2[20][100], matriz_laberinto3[20][100];//matrices de caracteres para almacenar
     int fila=0, columna=0;
 
-    //abrimos fichero laberinto e introducimos los caracteres en una matriz
-    pLaberinto=fopen("lab.txt", "r");
-    if(pLaberinto==NULL)
+    //ABRIMOS FICHERO laberinto1 E INTRODUCIMOS LOS CARACTERES EN LA matriz_laberinto1
+    pLaberinto1=fopen("lab.txt", "r");
+    if(pLaberinto1==NULL)
     {
          printf("Error al abrir fichero\n");
          return -1;
     }
     else
     {
-        while(fscanf(pLaberinto, "%c", &matriz_laberinto[fila][columna])!=EOF)//guardar laberinto en una matriz
+        while(fscanf(pLaberinto1, "%c", &matriz_laberinto1[fila][columna])!=EOF)//guardar laberinto en una matriz
         {
-            if(matriz_laberinto[fila][columna]=='\n')
+            columna++;
+            if(columna==100)
             {
                 fila++;
                 columna=0;
             }
-            else
-                columna++;
-
         }
-        fclose(pLaberinto);
+        columna=0, fila=0;
+        fclose(pLaberinto1);
     }
 
     do
@@ -76,7 +76,14 @@ int main()
                     switch(tecla_laberintos)
                     {
                     case 1:
-                        laberinto1(salida_laberinto);//Dibujo laberinto 1 e inserto en el vector salida_laberinto
+                        laberinto1(salida_laberinto);//Inserto en el vector salida_laberinto la salida del laberinto 1
+                        for(fila=0; fila<20; fila++)
+                        {
+                            for(columna=0; columna<100; columna++)
+                            {
+                                matriz_laberinto[fila][columna]=matriz_laberinto1[fila][columna];
+                            }
+                        }
                         break;                       //la salida del laberinto 1
                     case 2:
                         laberinto2(salida_laberinto);//Dibujo laberinto 2 e inserto en el vector salida_laberinto

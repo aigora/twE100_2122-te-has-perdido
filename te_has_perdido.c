@@ -251,7 +251,7 @@ void moverse(char matriz[][100], int *fila, int *columna) //funcion para moverse
         }
         else if(matriz[*fila+1][*columna] == 'S')
         {
-            printf("Encontraste la salida!!");
+            printf("Encontraste la salida!!\n");
             auxiliar=matriz[*fila][*columna];
             matriz[*fila][*columna]=matriz[*fila-1][*columna];
             matriz[*fila-1][*columna]=auxiliar;
@@ -282,7 +282,7 @@ void moverse(char matriz[][100], int *fila, int *columna) //funcion para moverse
             }
             else if(matriz[*fila+1][*columna] == 'S')
             {
-                printf("Encontraste la salida!!");
+                printf("Encontraste la salida!!\n");
                 auxiliar=matriz[*fila][*columna];
                 matriz[*fila][*columna]=matriz[*fila-1][*columna];
                 matriz[*fila-1][*columna]=auxiliar;
@@ -313,7 +313,7 @@ void moverse(char matriz[][100], int *fila, int *columna) //funcion para moverse
         }
         else if(matriz[*fila][*columna+1] == 'S')
         {
-            printf("Encontraste la salida!!");
+            printf("Encontraste la salida!!\n");
              auxiliar=matriz[*fila][*columna];
             matriz[*fila][*columna]=matriz[*fila][*columna+1];
             matriz[*fila][*columna+1]=auxiliar;
@@ -344,7 +344,7 @@ void moverse(char matriz[][100], int *fila, int *columna) //funcion para moverse
             }
             else if(matriz[*fila][*columna+1] == 'S')
             {
-                printf("Encontraste la salida!!");
+                printf("Encontraste la salida!!\n");
                 auxiliar=matriz[*fila][*columna];
                 matriz[*fila][*columna]=matriz[*fila][*columna+1];
                 matriz[*fila][*columna+1]=auxiliar;
@@ -374,7 +374,7 @@ void moverse(char matriz[][100], int *fila, int *columna) //funcion para moverse
         }
         else if(matriz[*fila+1][*columna] == 'S')
         {
-            printf("Encontraste la salida!!");
+            printf("Encontraste la salida!!\n");
             auxiliar=matriz[*fila][*columna];
             matriz[*fila][*columna]=matriz[*fila+1][*columna];
             matriz[*fila+1][*columna]=auxiliar;
@@ -405,7 +405,7 @@ void moverse(char matriz[][100], int *fila, int *columna) //funcion para moverse
             }
             else if(matriz[*fila+1][*columna] == 'S')
             {
-                printf("Encontraste la salida!!");
+                printf("Encontraste la salida!!\n");
                 auxiliar=matriz[*fila][*columna];
                 matriz[*fila][*columna]=matriz[*fila+1][*columna];
                 matriz[*fila+1][*columna]=auxiliar;
@@ -436,7 +436,7 @@ void moverse(char matriz[][100], int *fila, int *columna) //funcion para moverse
         }
         else if(matriz[*fila][*columna-1] == 'S')
         {
-            printf("Encontraste la salida!!");
+            printf("Encontraste la salida!!\n");
             auxiliar=matriz[*fila][*columna];
             matriz[*fila][*columna]=matriz[*fila][*columna-1];
             matriz[*fila][*columna-1]=auxiliar;
@@ -466,7 +466,7 @@ void moverse(char matriz[][100], int *fila, int *columna) //funcion para moverse
             }
             else if(matriz[*fila][*columna-1] == 'S')
             {
-                printf("Encontraste la salida!!");
+                printf("Encontraste la salida!!\n");
                 auxiliar=matriz[*fila][*columna];
                 matriz[*fila][*columna]=matriz[*fila][*columna-1];
                 matriz[*fila][*columna-1]=auxiliar;

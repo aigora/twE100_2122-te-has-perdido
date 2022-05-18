@@ -77,14 +77,14 @@ int main()
                     {
                     case 1:
                         laberinto1(salida_laberinto);//Inserto en el vector salida_laberinto la salida del laberinto 1
-                        for(fila=0; fila<20; fila++)
-                        {
+                        for(fila=0; fila<20; fila++) //Igualo los elementos de la matriz_laberinto1 a mi matriz generica
+                        {                            //para poder trabajar con ella
                             for(columna=0; columna<100; columna++)
                             {
                                 matriz_laberinto[fila][columna]=matriz_laberinto1[fila][columna];
                             }
                         }
-                        break;                       //la salida del laberinto 1
+                        break;
                     case 2:
                         laberinto2(salida_laberinto);//Dibujo laberinto 2 e inserto en el vector salida_laberinto
                         break;                       //la salida del laberinto 2
@@ -260,7 +260,7 @@ void moverse(char matriz[][100], int *fila, int *columna) //funcion para moverse
         {
             printf("Encontraste la salida!!\n");
             auxiliar=matriz[*fila][*columna];
-            matriz[*fila][*columna]=matriz[*fila-1][*columna];
+            matriz[*fila][*columna]=' ';
             matriz[*fila-1][*columna]=auxiliar;
             *fila=*fila-1;
         }
@@ -291,7 +291,7 @@ void moverse(char matriz[][100], int *fila, int *columna) //funcion para moverse
             {
                 printf("Encontraste la salida!!\n");
                 auxiliar=matriz[*fila][*columna];
-                matriz[*fila][*columna]=matriz[*fila-1][*columna];
+                matriz[*fila][*columna]=' ';
                 matriz[*fila-1][*columna]=auxiliar;
                 *fila=*fila-1;
             }
@@ -322,7 +322,7 @@ void moverse(char matriz[][100], int *fila, int *columna) //funcion para moverse
         {
             printf("Encontraste la salida!!\n");
              auxiliar=matriz[*fila][*columna];
-            matriz[*fila][*columna]=matriz[*fila][*columna+1];
+            matriz[*fila][*columna]=' ';
             matriz[*fila][*columna+1]=auxiliar;
             *columna=*columna+1;
         }
@@ -353,7 +353,7 @@ void moverse(char matriz[][100], int *fila, int *columna) //funcion para moverse
             {
                 printf("Encontraste la salida!!\n");
                 auxiliar=matriz[*fila][*columna];
-                matriz[*fila][*columna]=matriz[*fila][*columna+1];
+                matriz[*fila][*columna]=' ';
                 matriz[*fila][*columna+1]=auxiliar;
                 *columna=*columna+1;
             }else
@@ -383,7 +383,7 @@ void moverse(char matriz[][100], int *fila, int *columna) //funcion para moverse
         {
             printf("Encontraste la salida!!\n");
             auxiliar=matriz[*fila][*columna];
-            matriz[*fila][*columna]=matriz[*fila+1][*columna];
+            matriz[*fila][*columna]=' ';
             matriz[*fila+1][*columna]=auxiliar;
             *fila=*fila+1;
         }
@@ -414,7 +414,7 @@ void moverse(char matriz[][100], int *fila, int *columna) //funcion para moverse
             {
                 printf("Encontraste la salida!!\n");
                 auxiliar=matriz[*fila][*columna];
-                matriz[*fila][*columna]=matriz[*fila+1][*columna];
+                matriz[*fila][*columna]=' ';
                 matriz[*fila+1][*columna]=auxiliar;
                 *fila=*fila+1;
             }
@@ -445,7 +445,7 @@ void moverse(char matriz[][100], int *fila, int *columna) //funcion para moverse
         {
             printf("Encontraste la salida!!\n");
             auxiliar=matriz[*fila][*columna];
-            matriz[*fila][*columna]=matriz[*fila][*columna-1];
+            matriz[*fila][*columna]=' ';
             matriz[*fila][*columna-1]=auxiliar;
             *columna=*columna-1;
         }else
@@ -475,7 +475,7 @@ void moverse(char matriz[][100], int *fila, int *columna) //funcion para moverse
             {
                 printf("Encontraste la salida!!\n");
                 auxiliar=matriz[*fila][*columna];
-                matriz[*fila][*columna]=matriz[*fila][*columna-1];
+                matriz[*fila][*columna]=' ';
                 matriz[*fila][*columna-1]=auxiliar;
                 *columna=*columna-1;
             }else

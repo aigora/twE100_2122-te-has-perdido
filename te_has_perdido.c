@@ -59,8 +59,10 @@ int main()
         printf("\t\t\t                                                                  |----------|\n\n\n");
         do
         {
-            scanf("%i", &tecla_menu);
             fflush(stdin);   //funcion para que no se sature el scanf
+            scanf("%i", &tecla_menu);
+            if((tecla_menu!=1)&&(tecla_menu!=2)&&(tecla_menu!=0))
+                printf("Tecla incorrecta\n");
         }
         while((tecla_menu!=1)&&(tecla_menu!=2)&&(tecla_menu!=0));
 
@@ -96,6 +98,8 @@ int main()
                     {
                         printf("Introduzca su posicion inicial (fila>0, columna>0): ");
                         scanf("%i %i", &posicion[0], &posicion[1]);//fila y columna en la que quiero estar
+                        fflush(stdin);
+
                         if((posicion[0]>=20)||(posicion[0]<0)||(posicion[1]>=100)||(posicion[1]<0))
                         {
                             printf("Esa posicion se encuentra fuera del laberinto\n\n");
@@ -150,8 +154,10 @@ int main()
                     printf("\t\t                             ~~~~~~~Si(1)    No(0)~~~~~~~\n\n\n");//volvemos al menu de laberintos
                     do                                                                            //si no desea volver a jugar
                     {                                                                             //tenemos la opcion de menu o salir.
-                        fflush(stdin); //funcion para que no se sature el scanf
                         scanf("%i", &tecla_volverajugar);
+                        fflush(stdin); //funcion para que no se sature el scanf
+                        if((tecla_volverajugar!=1)&&(tecla_volverajugar!=0))
+                            printf("Tecla incorrecta\n");
                     }
                     while((tecla_volverajugar!=1)&&(tecla_volverajugar!=0));
                 }
@@ -180,6 +186,8 @@ int laberintos(void)
     {
         scanf("%i", &tecla_laberintos);
         fflush(stdin);   //funcion para que no se sature el scanf
+        if((tecla_laberintos!=1)&&(tecla_laberintos!=2)&&(tecla_laberintos!=3))
+            printf("Tecla incorrecta\n");
     }
     while((tecla_laberintos!=1)&&(tecla_laberintos!=2)&&(tecla_laberintos!=3));
     return tecla_laberintos;
@@ -214,6 +222,8 @@ int menu_salir(void)
     {
         fflush(stdin); //funcion para que no se sature el scanf
         scanf("%i", &tecla);
+        if((tecla!=1)&&(tecla!=0))
+            printf("Tecla incorrecta\n");
     }
     while((tecla!=1)&&(tecla!=0));
     return tecla;

@@ -9,6 +9,7 @@ void laberinto3(int salida[]);
 void estadisticas(void);
 int menu_salir(void);
 void moverse(char matriz[][100], int *fila, int *columna);
+void informacion(void);
 
 //menu principal
 int main()
@@ -47,13 +48,13 @@ int main()
 
     do
     {
-        printf("\t\t                                       |------------|\n");
-        printf("\t\t                                       | Bienvenido |\n");
-        printf("\t\t                                       |------------|\n\n\n\n");
-        printf("\t\t  |-------------------------------|                     |------------------------|\n");
-        printf("\t\t  | Registrarse o iniciar sesion  |                     | Estadisticas jugadores |\n");
-        printf("\t\t  |              (1)              |                     |            (2)         |\n");
-        printf("\t\t  |-------------------------------|                     |------------------------|\n\n\n\n\n\n\n");
+        printf("\t                                            |------------|\n");
+        printf("\t                                            | Bienvenido |\n");
+        printf("\t                                            |------------|\n\n\n\n");
+        printf("\t|-------------------------------|      |------------------------|        |------------------------|\n");
+        printf("\t| Registrarse o iniciar sesion  |      | Estadisticas jugadores |        |        Informacion     |\n");
+        printf("\t|              (1)              |      |            (2)         |        |            (3)         |\n");
+        printf("\t|-------------------------------|      |------------------------|        |------------------------|\n\n\n\n\n\n\n");
         printf("\t\t\t                                                                  |----------|\n");
         printf("\t\t\t                                                                  | Salir(0) |\n");
         printf("\t\t\t                                                                  |----------|\n\n\n");
@@ -64,7 +65,7 @@ int main()
             if((tecla_menu!=1)&&(tecla_menu!=2)&&(tecla_menu!=0))
                 printf("Tecla incorrecta\n");
         }
-        while((tecla_menu!=1)&&(tecla_menu!=2)&&(tecla_menu!=0));
+        while((tecla_menu!=1)&&(tecla_menu!=2)&&(tecla_menu!=3)&&(tecla_menu!=0));
 
         switch(tecla_menu)
         {
@@ -169,6 +170,10 @@ int main()
             //estadisticas();
             tecla_menu_salir=menu_salir();
             break;
+        case 3:
+            informacion();
+            tecla_menu_salir=menu_salir();
+            break;
         }
     }
     while((tecla_menu!=0)&&(tecla_menu_salir!=0));
@@ -227,6 +232,26 @@ int menu_salir(void)
     }
     while((tecla!=1)&&(tecla!=0));
     return tecla;
+}
+//Menu informacion
+void informacion(void) //Funcion que imprime por pantalla el contenido el fichero informacion
+{
+    FILE *pInformacion;
+    char letra;
+    pInformacion=fopen("informacion.txt", "r");
+    if(pInformacion==NULL)
+    {
+        printf("Error al abrir fichero informacion\n");
+        return -1;
+    }
+    else
+    {
+        while(fscanf(pInformacion, "%c", &letra)!=EOF)
+        {
+            printf("%c", letra);
+        }
+        fclose(pInformacion);
+    }
 }
 
 //Funcion para movernos por el laberinto

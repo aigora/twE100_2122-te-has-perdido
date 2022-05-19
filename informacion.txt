@@ -1,6 +1,6 @@
                                                    ~~~~Informacion~~~~
 
-Te presentamos un juegos de laberintos muy intuitivo. Antes de empezar a jugar tienes que iniciar sesion o registrarte.
+Te presentamos un juego de laberintos muy intuitivo. Antes de empezar a jugar tienes que iniciar sesion o registrarte.
 Una vez lo hayas hecho podrás elegir entre tres laberintos de distintos niveles dificultad, elige uno de ellos.
 
 
@@ -27,4 +27,4 @@ Para poder desplazarte por el laberinto debes pulsar las siguientes teclas:
 
 A lo largo de cada laberinto habra numerosas pistas indicadas con los simbolos "?" y "!" que te iran guiando hacia la salida.
 
-							Mucha suerte!!!
+                                                      Mucha suerte!!!

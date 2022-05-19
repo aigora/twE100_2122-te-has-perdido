@@ -1,0 +1,30 @@
+                                                   ~~~~Informacion~~~~
+
+Te presentamos un juegos de laberintos muy intuitivo. Antes de empezar a jugar tienes que iniciar sesion o registrarte.
+Una vez lo hayas hecho podrás elegir entre tres laberintos de distintos niveles dificultad, elige uno de ellos.
+
+
+                                                    ~~~~Controles~~~~
+
+Inicialmente el juego te pedira las coordenadas del laberinto donde quieres situarte. Estas coordenadas no seran
+cartesianas, sino la fila y la columna de una matriz. El primer numero que introduzcas sera la fila y el segundo
+la columna. Una vez introducidos estos datos te encontraras dentro del laberinto. 
+
+Para poder desplazarte por el laberinto debes pulsar las siguientes teclas:
+
+                                                            ^
+                                                            |
+                                                           (W)
+                                                <-- (A)           (D)-->
+                                                           (S)
+                                                            |
+                                                            V
+
+        w: Nos desplazamos hacia arriba una posicion.                 W: Nos desplazamos hacia arriba cinco posiciones.
+        s: Nos desplazamos hacia abajo una posicion.                  S: Nos desplazamos hacia abajo cinco posiciones
+        a: Nos desplazamos hacia la izquierda una posicion.           A: Nos desplazamos hacia la izquierda cinco posiciones.
+        d: Nos desplazamos hacia la derecha una posicion.             D: Nos desplazamos hacia la derecha cinco posiciones.
+
+A lo largo de cada laberinto habra numerosas pistas indicadas con los simbolos "?" y "!" que te iran guiando hacia la salida.
+
+							Mucha suerte!!!

@@ -20,10 +20,10 @@ int main()
     int salida_laberinto[2]; //punto del laberinto en el que se encuentra la salida, no lo conoce el usuario,
                             //solo el programador
     FILE *pLaberinto1, *pLaberinto2, *pLaberinto3;
-    char matriz_laberinto[20][100];
-    char matriz_laberinto1[20][100], matriz_laberinto2[20][100], matriz_laberinto3[20][100];//matrices de caracteres para almacenar
+    char matriz_laberinto[40][100];
+    char matriz_laberinto1[40][100], matriz_laberinto2[40][100], matriz_laberinto3[40][100];//matrices de caracteres para almacenar
     int fila=0, columna=0;
-
+    char aux;
     //ABRIMOS FICHERO laberinto1 E INTRODUCIMOS LOS CARACTERES EN LA matriz_laberinto1
     pLaberinto1=fopen("lab.txt", "r");
     if(pLaberinto1==NULL)
@@ -33,8 +33,13 @@ int main()
     }
     else
     {
-        while(fscanf(pLaberinto1, "%c", &matriz_laberinto1[fila][columna])!=EOF)//guardar laberinto en una matriz
+        while(fscanf(pLaberinto1, "%c", &aux)!=EOF)//guardar laberinto en una matriz
         {
+            if(aux!='\n')
+            {
+                matriz_laberinto1[fila][columna]=aux;
+
+            }
             columna++;
             if(columna==100)
             {
@@ -80,7 +85,7 @@ int main()
                     {
                     case 1:
                         laberinto1(salida_laberinto);//Inserto en el vector salida_laberinto la salida del laberinto 1
-                        for(fila=0; fila<20; fila++) //Igualo los elementos de la matriz_laberinto1 a mi matriz generica
+                        for(fila=0; fila<40; fila++) //Igualo los elementos de la matriz_laberinto1 a mi matriz generica
                         {                            //para poder trabajar con ella
                             for(columna=0; columna<100; columna++)
                             {
@@ -101,7 +106,7 @@ int main()
                         scanf("%i %i", &posicion[0], &posicion[1]);//fila y columna en la que quiero estar
                         fflush(stdin);
 
-                        if((posicion[0]>=20)||(posicion[0]<0)||(posicion[1]>=100)||(posicion[1]<0))
+                        if((posicion[0]>=40)||(posicion[0]<0)||(posicion[1]>=100)||(posicion[1]<0))
                         {
                             printf("Esa posicion se encuentra fuera del laberinto\n\n");
                         }
@@ -111,7 +116,7 @@ int main()
                             printf("Esa posicion es una pared\n");
                         }
                     }
-                    while(posicion[0]>=20||(posicion[0]<0)||(posicion[1]>=100)||(posicion[1]<0)||
+                    while(posicion[0]>=40||(posicion[0]<0)||(posicion[1]>=100)||(posicion[1]<0)||
                           ((matriz_laberinto[posicion[0]][posicion[1]]!=' ')&&(matriz_laberinto[posicion[0]][posicion[1]]!='?')
                                                                              &&(matriz_laberinto[posicion[0]][posicion[1]]!='S')));
                     //si la posicion elegida es una pared o se encuentra fuera del laberinto se vuelven a pedir coordenadas
@@ -124,7 +129,7 @@ int main()
                         printf("\t\t\t\t\t");
                         for(columna=posicion[1]-8; columna<=posicion[1]+8; columna++)
                         {
-                            if((fila>=0)&&(fila<20)&&(columna>=0)&&(columna<100)) //para que no se impriman caracteres aleatorios
+                            if((fila>=0)&&(fila<40)&&(columna>=0)&&(columna<99)) //para que no se impriman caracteres aleatorios
                                 printf("%c", matriz_laberinto[fila][columna]);    //que estan fuera del laberinto
                         }
                         printf("\n");
@@ -140,7 +145,7 @@ int main()
                             printf("\t\t\t\t\t");
                             for(columna=posicion[1]-8; columna<=posicion[1]+8; columna++)
                             {
-                                if((fila>=0)&&(fila<20)&&(columna>=0)&&(columna<100))
+                                if((fila>=0)&&(fila<40)&&(columna>=0)&&(columna<99))
                                     printf("%c", matriz_laberinto[fila][columna]);
                             }
                             printf("\n");
@@ -242,7 +247,6 @@ void informacion(void) //Funcion que imprime por pantalla el contenido el ficher
     if(pInformacion==NULL)
     {
         printf("Error al abrir fichero informacion\n");
-        return -1;
     }
     else
     {

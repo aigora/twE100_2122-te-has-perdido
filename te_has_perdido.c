@@ -23,7 +23,7 @@ int main()
     char matriz_laberinto[40][100];
     char matriz_laberinto1[40][100], matriz_laberinto2[40][100], matriz_laberinto3[40][100];//matrices de caracteres para almacenar
     int fila=0, columna=0;
-    char aux;
+
     //ABRIMOS FICHERO laberinto1 E INTRODUCIMOS LOS CARACTERES EN LA matriz_laberinto1
     pLaberinto1=fopen("lab.txt", "r");
     if(pLaberinto1==NULL)
@@ -33,13 +33,8 @@ int main()
     }
     else
     {
-        while(fscanf(pLaberinto1, "%c", &aux)!=EOF)//guardar laberinto en una matriz
+        while(fscanf(pLaberinto1, "%c", &matriz_laberinto1[fila][columna])!=EOF)//guardar laberinto en una matriz
         {
-            if(aux!='\n')
-            {
-                matriz_laberinto1[fila][columna]=aux;
-
-            }
             columna++;
             if(columna==100)
             {
@@ -50,7 +45,27 @@ int main()
         columna=0, fila=0;
         fclose(pLaberinto1);
     }
-
+    //ABRIMOS FICHERO Laberinto2 E INTRODUCIMOS LOS CARACTERES EN LA matriz_laberinto2
+    pLaberinto2=fopen("Laberinto bloc.txt", "r");
+    if(pLaberinto2==NULL)
+    {
+         printf("Error al abrir fichero\n");
+         return -2;
+    }
+    else
+    {
+        while(fscanf(pLaberinto2, "%c", &matriz_laberinto2[fila][columna])!=EOF)//guardar laberinto en una matriz
+        {
+            columna++;
+            if(columna==100)
+            {
+                fila++;
+                columna=0;
+            }
+        }
+        columna=0, fila=0;
+        fclose(pLaberinto2);
+    }
     do
     {
         printf("\t                                            |------------|\n");

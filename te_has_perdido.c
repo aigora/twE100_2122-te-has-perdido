@@ -101,7 +101,7 @@ int main()
                     case 1:
                         laberinto1(salida_laberinto);//Inserto en el vector salida_laberinto la salida del laberinto 1
                         for(fila=0; fila<40; fila++) //Igualo los elementos de la matriz_laberinto1 a mi matriz generica
-                        {                            //para poder trabajar con ella
+                        {                            //para poder trabajar con ella mas adelante
                             for(columna=0; columna<100; columna++)
                             {
                                 matriz_laberinto[fila][columna]=matriz_laberinto1[fila][columna];
@@ -109,8 +109,15 @@ int main()
                         }
                         break;
                     case 2:
-                        laberinto2(salida_laberinto);//Dibujo laberinto 2 e inserto en el vector salida_laberinto
-                        break;                       //la salida del laberinto 2
+                        laberinto2(salida_laberinto);//Inserto en el vector salida_laberinto la salida del laberinto 2
+                        for(fila=0; fila<40; fila++) //Igualo la matriz_laberinto2 a la matriz generica matriz_laberinto
+                        {                            //para poder trabajar con ella mas adelante
+                            for(columna=0; columna<100; columna++)
+                            {
+                                matriz_laberinto[fila][columna]=matriz_laberinto2[fila][columna];
+                            }
+                        }
+                        break;
                     case 3:
                         laberinto3(salida_laberinto);//Dibujo laberinto 3 e inserto en el vector salida_laberinto
                         break;                       //la salida del laberinto 3
@@ -160,7 +167,7 @@ int main()
                             printf("\t\t\t\t\t");
                             for(columna=posicion[1]-8; columna<=posicion[1]+8; columna++)
                             {
-                                if((fila>=0)&&(fila<40)&&(columna>=0)&&(columna<99))
+                                if((fila>=0)&&(fila<40)&&(columna>=0)&&(columna<99))//hasta 99 para que no me imprima el salto de linea entre fila y fila
                                     printf("%c", matriz_laberinto[fila][columna]);
                             }
                             printf("\n");
@@ -221,22 +228,22 @@ int laberintos(void)
 void laberinto1(int salida[])
 {
     printf("\t\t              ~~~~~~~~~~~~~~~~Has entrado en el laberinto 1~~~~~~~~~~~~~~~\n\n\n");
-    salida[0]=18;
+    salida[0]=38;
     salida[1]=98;               //coordenadas salida laberinto 1
 }
 //laberinto 2
 void laberinto2(int salida[])
 {
     printf("\t\t              ~~~~~~~~~~~~~~~~Has entrado en el laberinto 2~~~~~~~~~~~~~~~\n\n\n");
-    salida[0]=120;
-    salida[1]=20;              //coordenadas salida laberinto 2
+    salida[0]=38;
+    salida[1]=98;              //coordenadas salida laberinto 2
 }
 //laberinto 3
 void laberinto3(int salida[])
 {
     printf("\t\t              ~~~~~~~~~~~~~~~~Has entrado en el laberinto 3~~~~~~~~~~~~~~~\n\n\n");
-    salida[0]=80;
-    salida[1]=20;              //coordenadas salida laberinto 3
+    salida[0]=38;
+    salida[1]=98;              //coordenadas salida laberinto 3
 }
 //opcion menu-salir
 int menu_salir(void)

@@ -288,7 +288,7 @@ int main()
             tecla_menu_salir=menu_salir();
             break;
         case 2:
-            //estadisticas();
+            estadisticas();
             tecla_menu_salir=menu_salir();
             break;
         case 3:
@@ -354,6 +354,28 @@ int menu_salir(void)
     while((tecla!=1)&&(tecla!=0));
     return tecla;
 }
+
+//Funcion que imprime las estadisticas de los jugadores
+void estadisticas(void)
+{
+    FILE *pEstadisticas;
+    char letra;
+    pEstadisticas=fopen("estadisticas.txt", "r");
+    if(pEstadisticas==NULL)
+    {
+        printf("Error al abrir fichero estadisticas\n");
+    }
+    else
+    {
+        printf("\nUsuario\t\tMovimiento laberinto1\tMovimiento laberinto2\tMovimiento laberinto3\n");
+        printf("-------\t\t---------------------\t---------------------\t---------------------\n");
+        while(fscanf(pEstadisticas, "%c", &letra)!=EOF)
+            printf("%c", letra);
+        fclose(pEstadisticas);
+    }
+
+}
+
 //Menu informacion
 void informacion(void) //Funcion que imprime por pantalla el contenido el fichero informacion
 {

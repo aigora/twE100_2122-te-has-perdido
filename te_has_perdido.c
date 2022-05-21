@@ -1,5 +1,5 @@
 #include<stdio.h>
-#include <stdbool.h>
+#include<string.h>
 
 int laberintos(void);
 void laberinto1(int salida[]);
@@ -11,9 +11,25 @@ int menu_salir(void);
 void moverse(char matriz[][100], int *fila, int *columna);
 void informacion(void);
 
+
+typedef struct //estructura jugador que almacena su nombre, contrasenha y
+{              //movimientos en cada laberinto
+    char nombre[20], contrasenna[20];
+    int movimientos_laberinto1;
+    int movimientos_laberinto2;
+    int movimientos_laberinto3;
+}jugador;
+
+
 //menu principal
 int main()
 {
+    jugador datos_jugador[100]; //vector de estructuras que almacena los datos de todos los jugadores
+    FILE *pEstadisticas;
+    int num_jugador=0, i=0, se_cumple, total_jugadores;
+    char nombre[20];
+
+
     int tecla_menu, tecla_menu_salir, tecla_laberintos, tecla_volverajugar;
     int numero_movimientos=0;
     int posicion[2]; //posicion del jugador
@@ -95,6 +111,50 @@ int main()
             //{
                 do
                 {
+                    //AQUI PEDIMOS NOMBRE DEL USUARIO
+                    printf("Escriba su nombre:");
+                    scanf("%19s", nombre);
+                    fflush(stdin);
+                    printf("\n");
+
+                    //ABRIMOS FICHERO ESTADISTICAS
+                    pEstadisticas=fopen("estadisticas.txt", "r");
+                    if(pEstadisticas==NULL)
+                    {
+                        printf("Error al abrir el fichero de estaditicas\n");
+                        return -6;
+                    }
+                    else  //leemos el fichero estadisticas e introducimos su contenido en el vector de estructuras de los jugadores
+                    {
+                        i=0, num_jugador=0, se_cumple=0; //inicializamos las variables
+                        while(fscanf(pEstadisticas, "%[^\t]\t\t\t%i\t\t\t%i\t\t\t%i\n", datos_jugador[i].nombre, &datos_jugador[i].movimientos_laberinto1,
+                                     &datos_jugador[i].movimientos_laberinto2, &datos_jugador[i].movimientos_laberinto3)!=EOF)
+                        {
+                            if(strcmp(datos_jugador[i].nombre,nombre)==0)//comparo si son iguales al nombre introducido
+                            {                                            //y el nombre del jugador que esta en el fichero para ver si ya existe
+                                num_jugador=i;
+                                se_cumple=1; //si hay un nombre ya registrado se_cumple vale 1 sino vale cero
+                            }
+                            i++;
+                        }
+                        if(se_cumple==0) //si no exite un jugador con ese nombre lo anhado
+                        {
+                            total_jugadores=i; //al añadir un jugador nuevo al numero total de jugadores de le suma 1, es decir es igual a i
+                            num_jugador=i; //si es la primera vez que juega nuestro jugador se coloca en la ultima fila
+                            strcpy(datos_jugador[num_jugador].nombre,nombre); //le asigno el nombre escrito a al jugador[num_jugador] del vector
+                            datos_jugador[num_jugador].movimientos_laberinto1=10000; //si no juega al laberinto1 tiene 10000 movimientos
+                            datos_jugador[num_jugador].movimientos_laberinto2=10000; //si no juega al laberinto2 tiene 10000 movimientos
+                            datos_jugador[num_jugador].movimientos_laberinto3=10000; //si no juega al laberinto3 tiene 10000 movimientos
+                        }
+                        else
+                        {
+                            total_jugadores=i-1;//si no añado un jugador nuevo el numero total de jugadores va a ser i-1
+                        }
+
+                        fclose(pEstadisticas);
+                    }
+
+
                     tecla_laberintos=laberintos();
                     switch(tecla_laberintos)
                     {
@@ -177,6 +237,40 @@ int main()
                     }
                     printf("\n\n\nEncontraste la salida!!\n\n\n");
                     printf("Numero de movimientos: %i\n\n", numero_movimientos);
+
+                    switch(tecla_laberintos)//comparo numero de movimientos actual con el valor de partidas
+                    {                       //anteriores en el laberinto seleccionado
+                    case 1:
+                        if(numero_movimientos<datos_jugador[num_jugador].movimientos_laberinto1) //si el numero de movimientos es menor que el anterior
+                            datos_jugador[num_jugador].movimientos_laberinto1=numero_movimientos;//registro se modifica el numero de movimientos anterior
+                        break;
+                    case 2:
+                        if(numero_movimientos<datos_jugador[num_jugador].movimientos_laberinto2)//si el numero de movimientos es menor que el anterior
+                            datos_jugador[num_jugador].movimientos_laberinto2=numero_movimientos;//registro se modifica el numero de movimientos anterior
+                        break;
+                    case 3:
+                        if(numero_movimientos<datos_jugador[num_jugador].movimientos_laberinto3)//si el numero de movimientos es menor que el anterior
+                            datos_jugador[num_jugador].movimientos_laberinto3=numero_movimientos;//registro se modifica el numero de movimientos anterior
+                        break;
+                    }
+                    //APERTURA FICHERO ESTADISTICAS
+                    pEstadisticas=fopen("estadisticas.txt", "w");
+                    if(pEstadisticas==NULL)
+                    {
+                        printf("Error al abrir el fichero de estadisticas\n");
+                        return -5;
+                    }
+                    else
+                    {
+                        i=0;
+                        for(i=0; i<=total_jugadores; i++)//introduzco los valores actualizados en el fichero estadisticas
+                        {
+                            fprintf(pEstadisticas, "%s\t\t\t%i\t\t\t%i\t\t\t%i\n", datos_jugador[i].nombre, datos_jugador[i].movimientos_laberinto1,
+                                datos_jugador[i].movimientos_laberinto2, datos_jugador[i].movimientos_laberinto3);
+                        }
+                        fclose(pEstadisticas);
+                    }
+
                     numero_movimientos=0;//se resetea el numero de movimientos una vez hemos terminado de jugar
                     printf("\t\t                          ~~~~~~~Desea volver a jugar?~~~~~~~\n");//si desea volver a jugar
                     printf("\t\t                             ~~~~~~~Si(1)    No(0)~~~~~~~\n\n\n");//volvemos al menu de laberintos
@@ -556,33 +650,6 @@ int registrarse_iniciarsesion(void)
 
     printf("Escribe tu nombre y tu contraseña.");
     scanf("%s\n %s", &nombre, &contrasenna);
-
-}
-void estadisticas ()
-{
-	FILE *pf;
-	int movimientos[100], contador=0 ,n, numero_movimientos [3] = {0,0,0};
-	bool total = 0;
-	pf =fopen ("Estadisticas.txt", "r");
-	if (pf==NULL)//
-	{
-		printf ("No hay estadisticas anteriores\n");
-		fclose (pf);
-		pf = fopen ("Estadisticas.txt", "w");
-		fclose (pf);
-		system ("pause");
-		printf ("\n\n");
-		return;
-	}
-	while (fscanf (pf, "%d", &movimientos[contador]) != EOF)// escanea
-	{
-		if (contador >= 99)
-		{
-			contador = 0;
-			total = 1;
-		}
-
-	}
 
 }
 

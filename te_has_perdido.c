@@ -27,8 +27,8 @@ int main()
     jugador datos_jugador[100]; //vector de estructuras que almacena los datos de todos los jugadores
     FILE *pEstadisticas;
     int num_jugador=0, i=0, se_cumple, total_jugadores;
-    char nombre[20];
-
+    char nombre[20], contrasenha[20];
+    int contra;
 
     int tecla_menu, tecla_menu_salir, tecla_laberintos, tecla_volverajugar;
     int numero_movimientos=0;
@@ -106,16 +106,18 @@ int main()
         switch(tecla_menu)
         {
         case 1:
-            //salida_registrarse_iniciarsesion=registrarse_iniciarsesion();
-            //if(salida_registrarse_iniciarsesion==1)  //si devuelve un 1 se ha registrado/iniciado sesion correctamente
-            //{
+            printf("Escriba su nombre y genere una contrasenha.\n");
+            scanf("%19s %19s", &nombre, &contrasenha);
+            fflush(stdin);
+            printf("\n");
+
                 do
                 {
                     //AQUI PEDIMOS NOMBRE DEL USUARIO
-                    printf("Escriba su nombre:");
-                    scanf("%19s", nombre);
-                    fflush(stdin);
-                    printf("\n");
+                    do
+                    {
+                        contra = registrarse_iniciarsesion(contrasenha);
+                    }while(contra != 1);
 
                     //ABRIMOS FICHERO ESTADISTICAS
                     pEstadisticas=fopen("estadisticas.txt", "r");
@@ -284,7 +286,7 @@ int main()
                     while((tecla_volverajugar!=1)&&(tecla_volverajugar!=0));
                 }
                 while(tecla_volverajugar!=0);
-            //}
+
             tecla_menu_salir=menu_salir();
             break;
         case 2:
@@ -666,12 +668,23 @@ void moverse(char matriz[][100], int *fila, int *columna) //funcion para moverse
 
 }
 
-int registrarse_iniciarsesion(void)
+int registrarse_iniciarsesion(char contra[])
 {
-    char nombre[20], contrasenna[20];
+    char contrasenna[20];
 
-    printf("Escribe tu nombre y tu contraseña.");
-    scanf("%s\n %s", &nombre, &contrasenna);
+    printf("Escriba su contrasenha para iniciar sesion.\n");
+    scanf("%s", &contrasenna);
+    if(strcmp(contra, contrasenna) == 0)
+        {
+        printf("Sesion iniciada\n");
+        return 1;
+        }
+    else
+        {
+        printf("Contrasenha incorrecta.\n");
+        return 0;
+        }
+
 
 }
 

@@ -135,7 +135,7 @@ int main()
 
                 do
                 {
-                    //AQUI PEDIMOS NOMBRE DEL USUARIO
+                    //AQUI PEDIMOS CONTRASENHA DEL USUARIO
                     do
                     {
                         contra = registrarse_iniciarsesion(contrasenha);
@@ -225,14 +225,14 @@ int main()
                             printf("Esa posicion se encuentra fuera del laberinto\n\n");
                         }
                         else if((matriz_laberinto[posicion[0]][posicion[1]]!=' ')&&(matriz_laberinto[posicion[0]][posicion[1]]!='?')&&
-                                                                                    (matriz_laberinto[posicion[0]][posicion[1]]!='S'))
+                                (matriz_laberinto[posicion[0]][posicion[1]]!='S')&&(matriz_laberinto[posicion[0]][posicion[1]]!='!'))
                         {
                             printf("Esa posicion es una pared\n");
                         }
                     }
                     while(posicion[0]>=40||(posicion[0]<0)||(posicion[1]>=100)||(posicion[1]<0)||
                           ((matriz_laberinto[posicion[0]][posicion[1]]!=' ')&&(matriz_laberinto[posicion[0]][posicion[1]]!='?')
-                                                                             &&(matriz_laberinto[posicion[0]][posicion[1]]!='S')));
+                            &&(matriz_laberinto[posicion[0]][posicion[1]]!='S')&&(matriz_laberinto[posicion[0]][posicion[1]]!='!')));
                     //si la posicion elegida es una pared o se encuentra fuera del laberinto se vuelven a pedir coordenadas
 
                     matriz_laberinto[posicion[0]][posicion[1]]='X';//Marcamos con una X nuestro posicion actual

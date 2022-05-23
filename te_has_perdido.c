@@ -40,6 +40,28 @@ int main()
     char matriz_laberinto1[40][100], matriz_laberinto2[40][100], matriz_laberinto3[40][100];//matrices de caracteres para almacenar
     int fila=0, columna=0;
 
+    //ABRIMOS FICHERO laberinto1 E INTRODUCIMOS LOS CARACTERES EN LA matriz_laberinto1
+    pLaberinto1=fopen("laberinto1.txt", "r");
+    if(pLaberinto1==NULL)
+    {
+         printf("Error al abrir fichero\n");
+         return -1;
+    }
+    else
+    {
+        while(fscanf(pLaberinto1, "%c", &matriz_laberinto1[fila][columna])!=EOF)//guardar laberinto en una matriz
+        {
+            columna++;
+            if(columna==100)
+            {
+                fila++;
+                columna=0;
+            }
+        }
+        columna=0, fila=0;
+        fclose(pLaberinto1);
+    }
+
     //ABRIMOS FICHERO Laberinto2 E INTRODUCIMOS LOS CARACTERES EN LA matriz_laberinto2
     pLaberinto2=fopen("laberinto2.txt", "r");
     if(pLaberinto2==NULL)
@@ -160,16 +182,16 @@ int main()
                     tecla_laberintos=laberintos();
                     switch(tecla_laberintos)
                     {
-//                    case 1:
-//                        laberinto1(salida_laberinto);//Inserto en el vector salida_laberinto la salida del laberinto 1
-//                        for(fila=0; fila<40; fila++) //Igualo los elementos de la matriz_laberinto1 a mi matriz generica
-//                        {                            //para poder trabajar con ella mas adelante
-//                            for(columna=0; columna<100; columna++)
-//                            {
-//                                matriz_laberinto[fila][columna]=matriz_laberinto1[fila][columna];
-//                            }
-//                        }
-//                        break;
+                    case 1:
+                        laberinto1(salida_laberinto);//Inserto en el vector salida_laberinto la salida del laberinto 1
+                        for(fila=0; fila<40; fila++) //Igualo los elementos de la matriz_laberinto1 a mi matriz generica
+                        {                            //para poder trabajar con ella mas adelante
+                            for(columna=0; columna<100; columna++)
+                            {
+                                matriz_laberinto[fila][columna]=matriz_laberinto1[fila][columna];
+                            }
+                        }
+                        break;
                     case 2:
                         laberinto2(salida_laberinto);//Inserto en el vector salida_laberinto la salida del laberinto 2
                         for(fila=0; fila<40; fila++) //Igualo la matriz_laberinto2 a la matriz generica matriz_laberinto
@@ -335,7 +357,7 @@ int laberintos(void)
 void laberinto1(int salida[])
 {
     printf("\t\t              ~~~~~~~~~~~~~~~~Has entrado en el laberinto 1~~~~~~~~~~~~~~~\n\n\n");
-    salida[0]=38;
+    salida[0]=31;
     salida[1]=98;               //coordenadas salida laberinto 1
 }
 //laberinto 2

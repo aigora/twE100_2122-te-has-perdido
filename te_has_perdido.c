@@ -128,22 +128,17 @@ int main()
         switch(tecla_menu)
         {
         case 1:
-            printf("Escriba su nombre y genere una contrasenha.\n");
-            scanf("%19s %19s", nombre, contrasenha);
+            //PEDIMOS NOMBRE DE USUARIO PARA REGISTRARSE O INICIAR SESION
+            printf("Escriba su nombre:\n");
+            scanf("%19s", nombre);
             fflush(stdin);
             printf("\n");
 
                 do
                 {
-                    //AQUI PEDIMOS CONTRASENHA DEL USUARIO
-                    do
-                    {
-                        contra = registrarse_iniciarsesion(contrasenha);
-                    }while(contra != 1);
-
                     //ABRIMOS FICHERO ESTADISTICAS
-                    pEstadisticas=fopen("estadisticas.txt", "r");
-                    if(pEstadisticas==NULL)
+                    pEstadisticas=fopen("estadisticas.txt", "r"); //el fichero estadisticas estara compuesto por el nombre del jugador,
+                    if(pEstadisticas==NULL)                       //el numero de movimientos en cada laberinto, y la contrasenha
                     {
                         printf("Error al abrir el fichero de estaditicas\n");
                         return -6;
@@ -151,13 +146,17 @@ int main()
                     else  //leemos el fichero estadisticas e introducimos su contenido en el vector de estructuras de los jugadores
                     {
                         i=0, num_jugador=0, se_cumple=0; //inicializamos las variables
-                        while(fscanf(pEstadisticas, "%[^\t]\t\t\t%i\t\t\t%i\t\t\t%i\n", datos_jugador[i].nombre, &datos_jugador[i].movimientos_laberinto1,
-                                     &datos_jugador[i].movimientos_laberinto2, &datos_jugador[i].movimientos_laberinto3)!=EOF)
+                        while(fscanf(pEstadisticas, "%[^\t]\t\t\t%i\t\t\t%i\t\t\t%i\t\t\t%[^\n]\n", datos_jugador[i].nombre, &datos_jugador[i].movimientos_laberinto1,
+                                     &datos_jugador[i].movimientos_laberinto2, &datos_jugador[i].movimientos_laberinto3, datos_jugador[i].contrasenna)!=EOF)
                         {
                             if(strcmp(datos_jugador[i].nombre,nombre)==0)//comparo si son iguales al nombre introducido
                             {                                            //y el nombre del jugador que esta en el fichero para ver si ya existe
                                 num_jugador=i;
                                 se_cumple=1; //si hay un nombre ya registrado se_cumple vale 1 sino vale cero
+                                do
+                                {             //PEDIMOS CONTRASENHA Y COMPARAMOS CON LA QUE ESTA REGISTRADA
+                                    contra = registrarse_iniciarsesion(datos_jugador[i].contrasenna);
+                                }while(contra != 1);
                             }
                             i++;
                         }
@@ -165,7 +164,12 @@ int main()
                         {
                             total_jugadores=i; //al añadir un jugador nuevo al numero total de jugadores de le suma 1, es decir es igual a i
                             num_jugador=i; //si es la primera vez que juega nuestro jugador se coloca en la ultima fila
-                            strcpy(datos_jugador[num_jugador].nombre,nombre); //le asigno el nombre escrito a al jugador[num_jugador] del vector
+                            strcpy(datos_jugador[num_jugador].nombre,nombre); //le asigno el nombre escrito al jugador[num_jugador] del vector
+                            printf("Genere su contrasenha:\n"); //PEDIMOS CONTRASENHA NUEVA
+                            scanf("%19s", contrasenha);
+                            fflush(stdin);
+                            printf("\n");
+                            strcpy(datos_jugador[num_jugador].contrasenna,contrasenha); //le asigno la contrasenah escrita al jugador[num_jugador] del vector
                             datos_jugador[num_jugador].movimientos_laberinto1=10000; //si no juega al laberinto1 tiene 10000 movimientos
                             datos_jugador[num_jugador].movimientos_laberinto2=10000; //si no juega al laberinto2 tiene 10000 movimientos
                             datos_jugador[num_jugador].movimientos_laberinto3=10000; //si no juega al laberinto3 tiene 10000 movimientos
@@ -316,8 +320,8 @@ int main()
                         i=0;
                         for(i=0; i<=total_jugadores; i++)//introduzco los valores actualizados en el fichero estadisticas
                         {
-                            fprintf(pEstadisticas, "%s\t\t\t%i\t\t\t%i\t\t\t%i\n", datos_jugador[i].nombre, datos_jugador[i].movimientos_laberinto1,
-                                datos_jugador[i].movimientos_laberinto2, datos_jugador[i].movimientos_laberinto3);
+                            fprintf(pEstadisticas, "%s\t\t\t%i\t\t\t%i\t\t\t%i\t\t\t%s\n", datos_jugador[i].nombre, datos_jugador[i].movimientos_laberinto1,
+                                datos_jugador[i].movimientos_laberinto2, datos_jugador[i].movimientos_laberinto3, datos_jugador[i].contrasenna);
                         }
                         fclose(pEstadisticas);
                     }
@@ -412,8 +416,9 @@ int menu_salir(void)
 //Funcion que imprime las estadisticas de los jugadores
 void estadisticas(void)
 {
+    jugador v[100];
+    int i;
     FILE *pEstadisticas;
-    char letra;
     pEstadisticas=fopen("estadisticas.txt", "r");
     if(pEstadisticas==NULL)
     {
@@ -421,10 +426,16 @@ void estadisticas(void)
     }
     else
     {
-        printf("\nUsuario\t\tMovimiento laberinto1\tMovimiento laberinto2\tMovimiento laberinto3\n");
-        printf("-------\t\t---------------------\t---------------------\t---------------------\n");
-        while(fscanf(pEstadisticas, "%c", &letra)!=EOF)
-            printf("%c", letra);
+        printf("\nUsuario\t\tMovimientos laberinto1\tMovimientos laberinto2\tMovimientos laberinto3\n");
+        printf("-------\t\t----------------------\t----------------------\t----------------------\n");
+        i=0;
+        while(fscanf(pEstadisticas, "%[^\t]\t\t\t%i\t\t\t%i\t\t\t%i\t\t\t%[^\n]\n", v[i].nombre, &v[i].movimientos_laberinto1,
+                                           &v[i].movimientos_laberinto2, &v[i].movimientos_laberinto3, &v[i].contrasenna)!=EOF)
+        {
+            printf("%s\t\t\t%i\t\t\t%i\t\t\t%i\n", v[i].nombre, v[i].movimientos_laberinto1,
+                                           v[i].movimientos_laberinto2, v[i].movimientos_laberinto3);
+            i++;                            //imprimimos por pantalla todos los datos de los jugadores menos su contrasenha
+        }
         fclose(pEstadisticas);
     }
 

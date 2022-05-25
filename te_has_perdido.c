@@ -112,12 +112,12 @@ int main()
 
         switch(tecla_menu)
         {
-        case 1:
-            //PEDIMOS NOMBRE DE USUARIO PARA REGISTRARSE O INICIAR SESION
-            printf("Escriba su nombre:\n");
-            scanf("%19s", nombre);
-            fflush(stdin);
-            printf("\n");
+            case 1:
+                //PEDIMOS NOMBRE DE USUARIO PARA REGISTRARSE O INICIAR SESION
+                printf("Escriba su nombre:\n");
+                scanf("%19s", nombre);
+                fflush(stdin);
+                printf("\n");
 
                 do
                 {
@@ -324,17 +324,16 @@ int main()
                     while((tecla_volverajugar!=1)&&(tecla_volverajugar!=0));
                 }
                 while(tecla_volverajugar!=0);
-
-            tecla_menu_salir=menu_salir();
-            break;
-        case 2:
-            estadisticas();
-            tecla_menu_salir=menu_salir();
-            break;
-        case 3:
-            informacion();
-            tecla_menu_salir=menu_salir();
-            break;
+                tecla_menu_salir=menu_salir();
+                break;
+            case 2:
+                estadisticas();
+                tecla_menu_salir=menu_salir();
+                break;
+            case 3:
+                informacion();
+                tecla_menu_salir=menu_salir();
+                break;
         }
     }
     while((tecla_menu!=0)&&(tecla_menu_salir!=0));

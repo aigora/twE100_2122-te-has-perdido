@@ -4,7 +4,7 @@
 #include"menuslaberinto.h"
 
 
-//menu principal
+
 int main()
 {
     jugador datos_jugador[100]; //vector de estructuras que almacena los datos de todos los jugadores
@@ -87,6 +87,8 @@ int main()
         columna=0, fila=0;
         fclose(pLaberinto3);
     }
+
+    //MENU PRINCIPAL
     do
     {
         printf("\t                                            |------------|\n");

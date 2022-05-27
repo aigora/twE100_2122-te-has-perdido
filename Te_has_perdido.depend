@@ -1,0 +1,21 @@
+# depslib dependency file v1.0
+1653480081 source:c:\users\lenovo\desktop\diego uni\primero\twe100_2122-te-has-perdido\funcioneslaberinto.c
+	<stdio.h>
+	<string.h>
+	"funcioneslaberinto.h"
+
+1653479856 c:\users\lenovo\desktop\diego uni\primero\twe100_2122-te-has-perdido\funcioneslaberinto.h
+
+1653479945 source:c:\users\lenovo\desktop\diego uni\primero\twe100_2122-te-has-perdido\menuslaberinto.c
+	<stdio.h>
+	"funcioneslaberinto.h"
+	"menuslaberinto.h"
+
+1653479795 c:\users\lenovo\desktop\diego uni\primero\twe100_2122-te-has-perdido\menuslaberinto.h
+
+1653482562 source:c:\users\lenovo\desktop\diego uni\primero\twe100_2122-te-has-perdido\te_has_perdido.c
+	<stdio.h>
+	<string.h>
+	"funcioneslaberinto.h"
+	"menuslaberinto.h"
+
